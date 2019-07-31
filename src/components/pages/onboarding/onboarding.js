@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 
-class Onboarding extends {Component} {
+class Onboarding extends Component {
   render() {
     return <div />
   }

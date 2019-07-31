@@ -1,0 +1,41 @@
+@font-face {
+  font-family: 'CircularStdReg';
+  font-style: normal;
+  src: url('./fonts/CircularStd-Book.ttf') format('truetype'); /* IE9 Compat Modes */
+}
+
+@font-face {
+  font-family: 'CircularStdBold';
+  font-style: normal;
+  src: url('./fonts/CircularStd-Bold.ttf') format('truetype'); /* IE9 Compat Modes */
+}
+
+@font-face {
+  font-family: 'SpaceMonoReg';
+  font-style: normal;
+  src: url('./fonts/SpaceMono-Regular.ttf') format('truetype'); /* IE9 Compat Modes */
+}
+
+@font-face {
+  font-family: 'SpaceMonoBold';
+  font-style: normal;
+  src: url('./fonts/SpaceMono-Bold.ttf') format('truetype'); /* IE9 Compat Modes */
+}
+
+@font-face {
+  font-family: 'SpaceMonoItalic';
+  font-style: normal;
+  src: url('./fonts/SpaceMono-Italic.ttf') format('truetype'); /* IE9 Compat Modes */
+}
+
+@font-face {
+  font-family: 'WorkSansReg';
+  font-style: normal;
+  src: url('./fonts/WorkSans-Regular.ttf') format('truetype'); /* IE9 Compat Modes */
+}
+
+@font-face {
+  font-family: 'WorkSansBold';
+  font-style: normal;
+  src: url('./fonts/WorkSans-Bold.ttf') format('truetype'); /* IE9 Compat Modes */
+}

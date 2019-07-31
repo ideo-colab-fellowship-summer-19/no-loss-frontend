@@ -1,16 +1,9 @@
 // All of the methods for interfacing with the backend
-import Users from "./store/users.js";
-import {
-  ENV_API,
-  CLOUDINARY_CLOUD_NAME,
-  CLOUDINARY_UPLOAD_PRESET
-} from "./constants.js";
-import { STREAM_KEY, STREAM_APP_ID } from "./constants.js";
+import { ENV_API } from "./config.js";
 const API = ENV_API;
 //"http://symbol-staging-env.my55mapsej.us-west-2.elasticbeanstalk.com/";
 const CORS_HEADER = "SYMBOL-HEADER";
 const CORS_ORIGIN = "*";
-var stream = require("getstream");
 
 export default class Backend {
   static updateFunctions = {};
@@ -45,49 +38,30 @@ export default class Backend {
     return result;
   }
 
+  static async getTeamInfo(address) {
+    var params = "?address=" + address;
+    let url = API + "/getTeamInfo" + params
+    let result = await this.makeGetRequest(url)
+    return result
+  }
+
+  static async getTeamPhoto(address) {
+    var params = "?address=" + address;
+    let url = API + "/getTeamPhoto" + params
+    let result = await this.makeGetRequest(url)
+    return result
+  }
+  
+  // to Post
+  // data = new FormData();
+  // data.append("thing", thing)
+  // result = makePostRequest("/route", data)
   // Example Methods
 
-  static async getCardData(userInfo) {
-    let userInfoCopy = JSON.parse(JSON.stringify(userInfo));
-    console.log(userInfo);
-    delete userInfoCopy["accessToken"];
-    var data = new FormData();
-    console.log(Users);
-    data.append("userId", Users.auth.userId);
-    data.append("jwtToken", Users.auth["accessToken"]["jwtToken"]);
+  // to Get
 
-    const result = Backend.makePostRequest("/getCardData", data);
-
-    return result;
-  }
-
-  static async changeCardData(userInfo, stripeToken) {
-    let userInfoCopy = JSON.parse(JSON.stringify(userInfo));
-    console.log(userInfo);
-    delete userInfoCopy["accessToken"];
-    var data = new FormData();
-    console.log(Users);
-    data.append("userId", Users.auth.userId);
-    data.append("jwtToken", Users.auth["accessToken"]["jwtToken"]);
-    data.append("stripeToken", stripeToken)
-
-    const result = Backend.makePostRequest("/changeCardData", data);
-
-    return result;
-  }
-
-  static async saveUserInfo(userInfo) {
-    console.log("upating user: ", userInfo);
-    let userInfoCopy = JSON.parse(JSON.stringify(userInfo));
-    delete userInfoCopy["accessToken"];
-    delete userInfoCopy["userId"];
-    var data = new FormData();
-    userInfoCopy = JSON.stringify(userInfoCopy);
-    data.append("userId", Users.auth.userId);
-    data.append("userInfo", userInfoCopy);
-    data.append("jwtToken", Users.auth["accessToken"]["jwtToken"]);
-
-    const result = Backend.makePostRequest("/updateUser", data);
-    return result;
-  }
+  // var params = "?discountCode=" + discountCode;
+  // params += "&classId=" + classId;
+  // let url = API + "/getDiscountValue" + params;
+  // result = makeGetRequest(url)
 }
