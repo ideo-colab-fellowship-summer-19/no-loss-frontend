@@ -10,9 +10,12 @@ class PrizeDisplay extends Component {
   }
   render() {
     let countdownContainerStyle = {
+      display: "flex",
       fontFamily: "SpaceMonoReg",
       fontSize: "12",
-      paddingBottom: "10px"
+      paddingBottom: "10px",
+      alignItems: "center",
+      justifyContent: "center"
     }
     // TODO: Customize the countdown
     let oneSecond = 1000
@@ -23,7 +26,10 @@ class PrizeDisplay extends Component {
     return(
       <div style={{paddingTop: "25px"}}>
         <div className="countdown-container" style={countdownContainerStyle}>
-          <Countdown date={Date.now() + countdownDummy} /> to Harvest
+          <Countdown date={Date.now() + countdownDummy} /> 
+          <div style={{paddingLeft: "7px"}}>
+            to Harvest
+          </div>
         </div>
         <DrawingInfo />
       </div>

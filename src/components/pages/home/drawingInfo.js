@@ -37,14 +37,14 @@ class DrawingInfo extends Component {
   render() {
     let drawingInfoStyle = {
       width: "294px",
-      height: "162px",
+      height: "147px",
       left: "42px",
       top: "94px",
-      paddingTop: "10px",
-      paddingBottom: "25px",
+      paddingTop: "25px",
+      paddingBottom: "28px",
       paddingLeft: "10px",
       paddingRight: "10px",
-      background: "linear-gradient(162.46deg, #FF8D00 46.66%, #FEC600 101.77%)",
+      background: "linear-gradient(162.46deg, #F05025 9.77%, #FEC600 101.77%)",
       borderRadius: "7px",
       display: "flex",
       flexDirection: "column",

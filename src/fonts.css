@@ -35,6 +35,12 @@
 }
 
 @font-face {
+  font-family: 'WorkSansLight';
+  font-style: normal;
+  src: url('./fonts/WorkSans-Light.ttf') format('truetype'); /* IE9 Compat Modes */
+}
+
+@font-face {
   font-family: 'WorkSansBold';
   font-style: normal;
   src: url('./fonts/WorkSans-Bold.ttf') format('truetype'); /* IE9 Compat Modes */

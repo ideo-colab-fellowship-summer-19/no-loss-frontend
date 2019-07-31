@@ -11,9 +11,9 @@ class MenuBar extends Component {
 
   constructor(props) {
     super(props);
-    this.setState({
+    this.state = {
       currentLocation: ""
-    })
+    }
   }
 
   render() {
@@ -32,20 +32,21 @@ class MenuBar extends Component {
       position: "fixed",
       bottom: "0",
       alignItems: "center",
-      justifyContent: "space-between"
+      justifyContent: "space-between",
+      zIndex: "999"
     }
 
     let menuElementStyle = {
       display: "flex",
       alignItems: "center",
-      justifyContent: "center"
+      justifyContent: "center",
+      cursor: "pointer"
     }
     
     // let theAddress = this.context.address
     let theAddress = "dummy"
 
     return (
-      <Router>
         <div style={menuContainerStyle}>
           <div className="menu-bar" style={menuStyle}>
             <div className="menu-profile" style={menuElementStyle}>
@@ -70,7 +71,6 @@ class MenuBar extends Component {
             </div>
           </div>
         </div>
-      </Router>
     )
   }
 }

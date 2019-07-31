@@ -55,7 +55,7 @@ class GlobalContext extends Component {
 }
 
 function useWeb3Context() {
-  const context = React.useContext(Web3Context)
+  const context = Web3Context
   if (context == undefined) {
     throw("Problem with the context")
   }
@@ -63,4 +63,4 @@ function useWeb3Context() {
   return context
 }
 
-export {GlobalContext, Web3Context}
+export {GlobalContext, Web3Context, useWeb3Context}

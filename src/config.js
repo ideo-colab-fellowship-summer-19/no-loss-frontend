@@ -1,6 +1,6 @@
 import PoolContractInfo from "./poolContractInfo.js"
 
-export const POOL_ADDRESS = '0xf78b75cf3782535a0dd30e5491efce6d888eafaf'
+export const POOL_ADDRESS = '0x6e14e8534f48f15b8f2518a07fa60e90b887a538'
 
 // TODO: Find where to get the ABI
 
