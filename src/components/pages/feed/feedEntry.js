@@ -8,9 +8,9 @@ let pool;
 
 class FeedEntry extends Component {
   componentDidMount() {
-    let web3 = this.context.web3
-    let account = this.context.account
-    let pool = this.context.pool
+    web3 = this.context.web3
+    account = this.context.account
+    pool = this.context.pool
   }
 
   constructor(props) {

@@ -12,3 +12,5 @@ let DEV_API = "http://0.0.0.0"
 export const ENV_API = DEV_API
 
 export const POOL_ABI = PoolContractInfo.abi
+
+export const COUNTER_END_DATE = 'Fri, 02 Aug 2019 17:00:00'

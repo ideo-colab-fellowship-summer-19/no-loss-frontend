@@ -1,0 +1,20 @@
+
+.loading-overlay {
+  position:fixed;
+  left: 0;
+  height:100VH;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 9900;
+  width:100%;
+  top:0;
+  transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.loading-overlay-container {
+  justify-content: center;
+  display:flex;
+  width:100%;
+  align-items: center;
+  padding: 120px 0;
+  z-index: 9901;
+}

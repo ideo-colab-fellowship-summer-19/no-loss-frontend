@@ -118,6 +118,12 @@ if (ENV == "devWithChain") {
     getSeedCountSync(poolData) {
       return 3
     }
+
+    async getPrizeAmount() {
+      return {
+        estimatedPrize: 200
+      }
+    }
   }
 }
 

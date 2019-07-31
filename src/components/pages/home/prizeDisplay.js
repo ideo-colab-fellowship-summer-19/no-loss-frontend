@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Web3Context } from "../../../web3Context.js";
 import Countdown from 'react-countdown-now';
 import DrawingInfo from './drawingInfo';
+import { COUNTER_END_DATE } from "../../../config.js"
 
 class PrizeDisplay extends Component {
 
@@ -26,7 +27,7 @@ class PrizeDisplay extends Component {
     return(
       <div style={{paddingTop: "25px"}}>
         <div className="countdown-container" style={countdownContainerStyle}>
-          <Countdown date={Date.now() + countdownDummy} /> 
+          <Countdown date={COUNTER_END_DATE} /> 
           <div style={{paddingLeft: "7px"}}>
             to Harvest
           </div>
