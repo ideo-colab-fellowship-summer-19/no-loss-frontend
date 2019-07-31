@@ -63,6 +63,26 @@ class Team extends Component {
   }
 }
 
+/*
+{
+          this.state.hasLoaded ?
+            <div>
+              <HeaderDisplay displayText={textToDisplay}>
+                <ProfileEmpty />
+              </HeaderDisplay>
+              <div className="mainContent">
+                <TrophyCase numTrophies={1}/>
+                <GrowingSeed user={account} />
+                <TeamStats teamInfo={teamInfo} prizeInfo={prizeAmount}/>
+              </div>
+              <div className="teamTab">
+                <TeamDisplay/>
+              </div>
+            </div> :
+            <LoadingOverlay />
+        }
+*/
+
 //TODO:
 Team.contextType = useWeb3Context()
 

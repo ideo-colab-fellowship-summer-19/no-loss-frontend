@@ -2,6 +2,8 @@ import React, { Component } from "react";
 //TODO:
 import { useWeb3Context } from "../../../web3Context.js";
 import { BrowserRouter as Router, Route, Link, Redirect, Switch } from 'react-router-dom'
+import AnimatingSpinnerBigWhite from "./svg/animating-spinner-big-white"
+
 
 
 let web3;
