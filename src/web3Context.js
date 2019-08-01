@@ -7,6 +7,7 @@ import React, { Component } from "react";
 import Web3 from 'web3';
 import { POOL_ADDRESS, POOL_ABI } from './config.js';
 import { ENV } from "./config.js"
+import Backend from "./backend.js"
 
 console.log(Web3)
 
@@ -60,15 +61,31 @@ class GlobalContext extends Component {
     console.log(pool)
     accounts = await web3.eth.getAccounts()
   }
+  
+  componentWillMount() {
+    // prep local storage
+  }
 
   async componentDidMount() {
     await this.fetchData();
     this.setState({ web3: web3, account: accounts[0], pool: pool })
-
+    if (ENV === "devNoChain") {
+      Backend.setLocal(accounts[0], 
+        {
+          "bees": ["football", "long"],
+          "plantType": "corn"
+        })
+    } else if (ENV === "devWithChain") {
+      Backend.setLocal(accounts[0],
+        {
+          "bees": [],
+          "plantType": ""
+        })
+    }
     // dev only
     if (ENV === "devNoChain") {
       let curUser = {bees: ["football", "small"], plantType: "tomato"}
-      localStorage.setItem(accounts[0], curUser)
+      Backend.setLocal(accounts[0], curUser)
     }
 
     this.props.web3Loaded()

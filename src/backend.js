@@ -6,9 +6,27 @@ const CORS_HEADER = "SYMBOL-HEADER";
 const CORS_ORIGIN = "*";
 let Backend;
 
-if (ENV === "devNoChain") {
+function getFromLocalInternal(theKey) {
+  console.log({ ...localStorage.getItem(theKey) })
+  return JSON.parse(localStorage.getItem(theKey))
+}
+
+function setLocalInternal(theKey, item) {
+  localStorage.setItem(theKey, JSON.stringify(item))
+}
+
+if (ENV === "devWithChain") {
   Backend = class {
     static updateFunctions = {};
+
+    static async getFromLocal(theKey) {
+      console.log({ ...localStorage.getItem(theKey) })
+      return JSON.parse(localStorage.getItem(theKey))
+    }
+
+    static async setToLocal(theKey, item) {
+      return JSON.parse(localStorage.setItem(theKey, item))
+    }
 
     static async makePostRequest(endpoint, data) {
       let response = await fetch(API + endpoint, {
@@ -67,9 +85,19 @@ if (ENV === "devNoChain") {
     // let url = API + "/getDiscountValue" + params;
     // result = makeGetRequest(url)
   }
-} else {
+} else if (ENV === "devNoChain") {
+  console.log("We here boi")
   Backend = class {
     static updateFunctions = {};
+
+    static async getFromLocal(theKey) {
+      console.log({ ...localStorage.getItem(theKey) })
+      return JSON.parse(localStorage.getItem(theKey))
+    }
+
+    static async setLocal(theKey, item) {
+      localStorage.setItem(theKey, JSON.stringify(item))
+    }
 
     static async getTeamInfo(address) {
       let result = {
@@ -88,23 +116,25 @@ if (ENV === "devNoChain") {
     }
 
     static async getBees(account) {
-      return localStorage.getItem(account).bees
+      return getFromLocalInternal(account).bees
     }
 
     static async setBees(account, bees) {
-      let curUser = localStorage.getItem(account)
+      let curUser = getFromLocalInternal(account)
+      console.log("the user")
+      console.log(curUser)
       curUser.bees = bees
-      localStorage.setItem(account, curUser)
+      localStorage.setLocalInternal(account, curUser)
     }
 
     static async addBee(account, bee) {
-      let curUser = localStorage.getItem(account)
+      let curUser = getFromLocalInternal(account)
       curUser.bees = curUser.bees.push(bee)
-      localStorage.setItem(account, curUser)
+      localStorage.setLocalInternal(account, curUser)
     }
 
     static async getPlantType(account) {
-      let curUser = localStorage.getItem(account)
+      let curUser = getFromLocalInternal(account)
       return curUser.plantType
     }
 

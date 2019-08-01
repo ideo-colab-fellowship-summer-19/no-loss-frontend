@@ -15,13 +15,19 @@ let web3;
 let account;
 let pool;
 let blockchain;
+let teamInfo;
+let prizeAmount;
 
 class Team extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     web3 = this.context.web3
     account = this.context.account
     pool = this.context.pool
     blockchain = new Blockchain(this.context)
+    teamInfo = await Backend.getTeamInfo(account);
+    prizeAmount = await blockchain.getPrizeAmount().estimatedPrize;
+    console.log("info mounted")
+    console.log(teamInfo)
     this.setState({hasLoaded: true})
   }
 
@@ -34,19 +40,14 @@ class Team extends Component {
 
   render() {
     let textToDisplay;
-    let teamInfo;
-    let prizeAmount
-    if (account) {
-      teamInfo = Backend.getTeamInfo();
-      textToDisplay = teamInfo.name
-      prizeAmount = blockchain.getPrizeAmount().estimatedPrize;
-    }
+    console.log("Loaded")
+    console.log(this.state.hasLoaded)
     return (
       <div>
         {
           this.state.hasLoaded ?
             <div>
-              <HeaderDisplay displayText={textToDisplay}>
+              <HeaderDisplay displayText={teamInfo.name}>
                 <ProfileEmpty />
               </HeaderDisplay>
               <div className="mainContent">

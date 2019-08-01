@@ -22,6 +22,8 @@ let pool;
 const Bees = ({ params }) => {
   let beeList = params.beeList
   let isMinimized = params.isMinimized
+  console.log("Da Params")
+  console.log(params)
   let toReturn = beeList.map(bee => {
     switch (bee) {
       case "fat":
@@ -65,6 +67,8 @@ class TrophyCase extends Component {
     account = this.context.account
     pool = this.context.pool
     let bees = await this.getBees()
+    console.log("da bees")
+    console.log(bees)
     this.setState({hasLoaded: true, bees: bees })
   }
 
@@ -74,7 +78,11 @@ class TrophyCase extends Component {
   }
 
   async getBees() {
+    console.log("the account")
+    console.log(account)
     let theBees = await Backend.getBees(account)
+    console.log("running")
+    console.log(theBees)
     return theBees
   }
 
@@ -111,17 +119,19 @@ class TrophyCase extends Component {
 
     if (this.state.hasLoaded) {
       if (this.state.isMinimized) {
+        console.log(this.state.bees)
         // minimized one line
         toRender =
-          <div style={minimizedStyle} onClick={this.changeVisibility()}>
-            <Bees params={{ beeList: this.state.bees, isMinimized: this.state.isMinimized }} style={{display: "flex", flexDirection: "column",
-              justifyContent: "left", paddingLeft: "5px", paddingRight: "5px"}}/>
+          <div style={minimizedStyle} onClick={this.changeVisibility}>
+            <Bees params={{ beeList: this.state.bees, isMinimized: this.state.isMinimized }} 
+              style={{display: "flex", flexDirection: "column", justifyContent: "left", 
+              paddingLeft: "5px", paddingRight: "5px"}}/>
             <LittleRightArrow style={{justifySelf: "right", marginLeft: "5px"}}/>
           </div>
       } else {
         // full screen
         toRender = 
-          <div style={expandedStyle} onClick={this.changeVisibility()}>
+          <div style={expandedStyle} onClick={this.changeVisibility}>
           <Bees params={{ beeList: this.state.bees, isMinimized: this.state.isMinimized }} />
         </div>
       }
