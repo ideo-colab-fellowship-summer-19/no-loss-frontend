@@ -14,7 +14,12 @@
     "url-parse": "^1.4.7",
     "web3": "^1.2.0",
     "web3-react": "^5.0.4",
-    "react-countdown-now": "2.1.1"
+    "react-countdown-now": "^2.1.1",
+    "ethereum-qr-code": "*",
+    "truffle-hdwallet-provider": "*",
+    "dotenv": "*",
+    "truffle-wallet-provider": "*",
+    "ethereumjs-wallet": "*"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -36,5 +41,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "dotenv": "^8.0.0",
+    "ethereumjs-wallet": "^0.6.3",
+    "truffle-wallet-provider": "0.0.5"
   }
 }

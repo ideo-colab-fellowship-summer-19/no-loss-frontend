@@ -15,6 +15,7 @@ import Settings from "./components/pages/settings/settings.js";
 import Team from "./components/pages/team/team.js";
 import MenuBar from "./components/nav/menuBar.js";
 import AnimatingSpinnerBigWhite from "./svg/animating-spinner-big-white"
+import { ENV } from "./config.js"
 
 
 /* React Router Tip:
@@ -39,6 +40,10 @@ class App extends Component {
       web3Loaded: false
     }
     this.web3Loaded = this.web3Loaded.bind(this)
+  }
+
+  componentDidMount() {
+    
   }
 
   web3Loaded() {

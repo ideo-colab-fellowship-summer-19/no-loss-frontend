@@ -4,11 +4,15 @@ import LineDelimiter from "../../../svg/lineDelimiter.js"
 import FeedEntry from "./feedEntry.js"
 // Likely gonna fake this one for now
 
+let web3;
+let account;
+let pool;
+
 class Feed extends Component {
   componentDidMount() {
-    let web3 = this.context.web3
-    let account = this.context.account
-    let pool = this.context.pool
+    web3 = this.context.web3
+    account = this.context.account
+    pool = this.context.pool
   }
 
   constructor(props) {
@@ -26,8 +30,8 @@ class Feed extends Component {
       top: "465px",
       background: "#FFFFFF",
       boxShadow: "0px -1px 4px rgba(0, 0, 0, 0.15)",
-      borderTopLeftRadius: "20px",
-      borderTopRightRadius: "20px",
+      borderTopLeftRadius: "30px",
+      borderTopRightRadius: "30px",
       overflow: "scroll"
     }
 

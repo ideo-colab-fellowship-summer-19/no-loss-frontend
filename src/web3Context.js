@@ -6,6 +6,7 @@ Would prefer to do this using contexts, but not worth it given time constraints
 import React, { Component } from "react";
 import Web3 from 'web3';
 import { POOL_ADDRESS, POOL_ABI } from './config.js';
+import { ENV } from "./config.js"
 
 console.log(Web3)
 
@@ -27,7 +28,29 @@ class GlobalContext extends Component {
     console.log(Web3.currentProvider)
     // TODO: Modify to work with metamask
     // web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
-    web3 = new Web3("http://localhost:8545")
+    if (ENV === "devNoChain") {
+      /*
+      if (window.ethereum) { // for modern DApps browser
+        window.web3 = new Web3(ethereum);
+        try {
+          await ethereum.enable();
+        } catch (error) {
+          console.error(error);
+        }
+      } else if (web3) { // for old DApps browser
+        window.web3 = new Web3(web3.currentProvider);
+      } else {
+        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+      }
+      */
+      web3 = new Web3("http://localhost:8545")
+      
+      
+    } else {
+      web3 = new Web3(new Web3.providers.HttpProvider(
+        'ropsten.infura.io/v3/cb06dad7697b45b3999d15a8745be75c'
+      ));
+    }
     console.log("My thing")
     console.log(web3)
     // TODO: populate config.js with the address and ABI
@@ -41,6 +64,13 @@ class GlobalContext extends Component {
   async componentDidMount() {
     await this.fetchData();
     this.setState({ web3: web3, account: accounts[0], pool: pool })
+
+    // dev only
+    if (ENV === "devNoChain") {
+      let curUser = {bees: ["football", "small"], plantType: "tomato"}
+      localStorage.setItem(accounts[0], curUser)
+    }
+
     this.props.web3Loaded()
   }
 

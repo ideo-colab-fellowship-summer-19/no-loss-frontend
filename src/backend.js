@@ -87,6 +87,27 @@ if (ENV === "devNoChain") {
       return result
     }
 
+    static async getBees(account) {
+      return localStorage.getItem(account).bees
+    }
+
+    static async setBees(account, bees) {
+      let curUser = localStorage.getItem(account)
+      curUser.bees = bees
+      localStorage.setItem(account, curUser)
+    }
+
+    static async addBee(account, bee) {
+      let curUser = localStorage.getItem(account)
+      curUser.bees = curUser.bees.push(bee)
+      localStorage.setItem(account, curUser)
+    }
+
+    static async getPlantType(account) {
+      let curUser = localStorage.getItem(account)
+      return curUser.plantType
+    }
+
     // to Post
     // data = new FormData();
     // data.append("thing", thing)

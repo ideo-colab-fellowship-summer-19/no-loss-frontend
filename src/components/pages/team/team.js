@@ -6,7 +6,10 @@ import HeaderDisplay from "../../display/headerDisplay.js"
 import Backend from "../../../backend.js"
 import Blockchain from "../../../blockchain.js";
 import ProfileEmpty from "../../../svg/profileEmpty.js"
-
+import GrowingSeedDisplay from "../../display/growingSeedDisplay.js"
+import TeamStatsDisplay from "./teamStatsDisplay.js"
+import TrophyCase from "./tropyCase.js"
+import TeamDisplay from "../../display/teamDisplay.js"
 
 let web3;
 let account;
@@ -27,13 +30,12 @@ class Team extends Component {
     this.state = {
       hasLoaded: false
     }
-
   }
 
   render() {
     let textToDisplay;
     let teamInfo;
-    let prizeInfo;
+    let prizeAmount
     if (account) {
       teamInfo = Backend.getTeamInfo();
       textToDisplay = teamInfo.name
@@ -49,8 +51,8 @@ class Team extends Component {
               </HeaderDisplay>
               <div className="mainContent">
                 <TrophyCase numTrophies={1}/>
-                <GrowingSeed user={account} />
-                <TeamStats teamInfo={teamInfo} prizeInfo={prizeAmount}/>
+                <GrowingSeedDisplay user={account} />
+                <TeamStatsDisplay teamInfo={teamInfo} prizeInfo={prizeAmount}/>
               </div>
               <div className="teamTab">
                 <TeamDisplay/>
