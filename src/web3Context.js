@@ -29,7 +29,7 @@ class GlobalContext extends Component {
     console.log(Web3.currentProvider)
     // TODO: Modify to work with metamask
     // web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
-    if (ENV === "devNoChain") {
+    if (!(ENV === "devNoChain")) {
       /*
       if (window.ethereum) { // for modern DApps browser
         window.web3 = new Web3(ethereum);
@@ -49,7 +49,7 @@ class GlobalContext extends Component {
       
     } else {
       web3 = new Web3(new Web3.providers.HttpProvider(
-        'ropsten.infura.io/v3/cb06dad7697b45b3999d15a8745be75c'
+        'mainnet.infura.io/v3/cb06dad7697b45b3999d15a8745be75c'
       ));
     }
     console.log("My thing")
