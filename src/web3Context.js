@@ -73,7 +73,8 @@ class GlobalContext extends Component {
       Backend.setLocal(accounts[0], 
         {
           "bees": [],
-          "plantType": ""
+          "plantType": "",
+          "totalSeeds": 0
         })
     } else if (ENV === "devWithChain") {
       Backend.setLocal(accounts[0],
@@ -84,8 +85,13 @@ class GlobalContext extends Component {
     }
     // dev only
     if (ENV === "devNoChain") {
-      let curUser = {bees: [], plantType: "tomato"}
-      Backend.setLocal(accounts[0], curUser)
+      if (!Backend.userExists(accounts[0])) {
+        let curUser = {
+          "bees": [],
+          "plantType": "",
+          "totalSeeds": 0}
+        Backend.setLocal(accounts[0], curUser)
+      }
     }
 
     this.props.web3Loaded()

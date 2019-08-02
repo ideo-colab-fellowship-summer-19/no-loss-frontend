@@ -38,7 +38,7 @@ class FeedEntry extends Component {
         <ProfileEmpty />
         <div style={{ fontFamily: "WorkSansReg", color: "#A5A5A5", fontSize: "9px", 
           paddingTop: "11px", marginLeft: "-4px"}}>
-          you planted your first seed!
+          this is a mock transaction!
         </div>
         <div style={{
           fontFamily: "WorkSansLight", color: "#A5A5A5", fontSize: "9px",

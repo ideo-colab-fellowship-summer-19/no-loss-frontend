@@ -3,12 +3,14 @@ import { useWeb3Context } from "../../web3Context";
 import { BrowserRouter as Router, Route, Link, Redirect, Switch } from 'react-router-dom'
 import AnimatingSpinnerBigWhite from "../../svg/animating-spinner-big-white"
 import Blockchain from "../../blockchain.js"
+import Backend from "../../backend.js"
 
 
 let web3;
 let account;
 let pool;
 let userData
+let totalSeeds
 
 class SeedPod extends Component {
   async componentDidMount() {
@@ -17,7 +19,10 @@ class SeedPod extends Component {
     pool = this.context.pool
     let blockchain = new Blockchain(this.context)
     userData = await blockchain.getUserData()
-    this.setState({ hasLoaded: true })
+    totalSeeds = await Backend.getTotalSeeds(account)
+    console.log("the seeds")
+    console.log(totalSeeds)
+    this.setState({ hasLoaded: true, totalSeeds: totalSeeds, reload: this.props.reload})
   }
 
   constructor(props) {
@@ -38,7 +43,7 @@ class SeedPod extends Component {
           </div>
           <div style={{
             fontFamily: "SpaceMonoBold"}}>
-            {userData.totalTickets}
+            {this.state.totalSeeds}
           </div>
         </div>
       )

@@ -93,12 +93,12 @@ class DrawingFlow extends Component {
     super(props);
     this.state = {hasLoaded: false, drawingStatus: 0}
     this.increment = this.increment.bind(this);
-
   }
 
   increment() {
     // TODO: Change if animations added
     console.log(this.state)
+    console.log("incremeneting")
     if (this.state.drawingStatus === 1) {
       console.log(this.props.endDrawing)
       let beeRandom = Math.floor((Math.random() * 10) + 1);
@@ -185,7 +185,7 @@ class DrawingFlow extends Component {
 
     return (
       <div className={"drawing"}
-        style={{marginBottom: "15px"}}>
+        style={{marginBottom: "15px"}} onClick={this.increment}>
         {toRender}
         {this.props.children}
       </div>

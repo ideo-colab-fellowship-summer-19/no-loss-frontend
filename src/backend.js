@@ -132,6 +132,33 @@ if (ENV === "devWithChain") {
       return result
     }
 
+    static async buyTickets(address) {
+      let curUser = getFromLocalInternal(address)
+      curUser.totalSeeds = 1
+      setLocalInternal(address, curUser)
+      return null
+    }
+
+    static async userExists(address) {
+      let curUser = getFromLocalInternal(address)
+      if (curUser) {
+        return true
+      } else {
+        return false
+      }
+    }
+
+    static async joinTeam(account, value) {
+      let curUser = getFromLocalInternal(account)
+      curUser.isJoined = true
+      setLocalInternal(account, curUser)
+    }
+
+    static async isJoined(account) {
+      let curUser = getFromLocalInternal(account)
+      return curUser.isJoined
+    }
+
     static async addBee(account, beeNum) {
       let curUser = getFromLocalInternal(account)
       let bees = curUser.bees
@@ -168,6 +195,13 @@ if (ENV === "devWithChain") {
     static async getPlantType(account) {
       let curUser = getFromLocalInternal(account)
       return curUser.plantType
+    }
+
+    static async getTotalSeeds(account) {
+      let curUser = await getFromLocalInternal(account)
+      console.log("TEH SEEEDS")
+      console.log(curUser)
+      return curUser.totalSeeds
     }
 
     static async setPlantType(account, plant) {

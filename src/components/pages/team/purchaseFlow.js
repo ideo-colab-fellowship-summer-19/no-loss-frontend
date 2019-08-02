@@ -15,6 +15,7 @@ let web3;
 let account;
 let pool;
 let blockchain;
+let totalSeeds
 
 class PurchaseFlow extends Component {
   async componentDidMount() {
@@ -23,6 +24,7 @@ class PurchaseFlow extends Component {
     pool = this.context.pool
     blockchain = new Blockchain(this.context)
     let user = await blockchain.getUserDataById(account)
+    totalSeeds = await Backend.getTotalSeeds(account)
     console.log(user)
     console.log("payer")
     console.log(user)
@@ -56,13 +58,14 @@ class PurchaseFlow extends Component {
     this.setState({ticketsToBuy: 20})
   }
 
-  buyTickets() {
+  async buyTickets() {
     if (this.state.ticketsToBuy === 0) {
       this.setState({poppedUp: true, message: "You haven't selected any seeds."})
     } else if (this.state.ticketsToBuy != 1) {
       this.setState({poppedUp: true, message: "You only have enough coins to buy one seed."})
     } else {
       // blockchain.buyTickets(this.state.ticketsToBuy)
+      await Backend.buyTickets(account)
       this.setState({hasBought: true})
     }
   }
@@ -203,7 +206,7 @@ class PurchaseFlow extends Component {
             <div style={{display: "flex", flexDirection: "column", 
               fontFamily: "WorkSansBold", fontSize: "14px", alignItems: "center"}}>
               <div style={{marginBottom: "7px"}}>
-                {this.state.user.totalTickets}
+                {totalSeeds}
               </div>
               <div style={{fontSize:"9px", color: "#A5A5A5", display: "flex", flexDirection: "column", justifyContent: "center", alignItems:"center"}}>
                 <div style={{marginBottom: "3px"}}>

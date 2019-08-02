@@ -88,10 +88,11 @@ class GrowingSeedDisplay extends Component {
     blockchain = new Blockchain(this.context)
     let drawingDate = new Date(COUNTER_END_DATE)
     let currentDate = new Date()
-    let timeDiff = drawingDate - currentDate
-    let timeDiffMinutes = Math.floor(timeDiff / 1000 / 60 / 60 / 60);
+    let timeDiff = drawingDate.getTime() - currentDate.getTime()
+    let timeDiffMinutes = Math.floor(timeDiff / 1000 / 60);
     let roundStatus = "unset";
     console.log("upupupup")
+    console.log(timeDiffMinutes)
     console.log(this.state.drawingFinished)
     if (this.state.drawingFinished) {
       roundStatus = "early"
@@ -104,9 +105,6 @@ class GrowingSeedDisplay extends Component {
     } else {
       roundStatus = "early"
     }
-
-    roundStatus = "finished";
-
 
     let plantType = await Backend.getPlantType(this.props.user)
     console.log("the plant type")

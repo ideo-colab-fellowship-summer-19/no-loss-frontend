@@ -45,6 +45,7 @@ class Team extends Component {
 
     prizeAmount = await blockchain.getPrizeAmount().estimatedPrize;
     isPlanted = await Backend.isPlanted(account);
+    isJoined = await Backend.isJoined(account);
 
     console.log("plantingstatus")
     console.log(isPlanted)
@@ -84,12 +85,17 @@ class Team extends Component {
 
     } else {
       
-      let result = await blockchain.joinTeam(account, this.state.value)
+      // let result = await blockchain.joinTeam(account, this.state.value)
+      let result = await Backend.joinTeam(account, this.state.value)
+      this.setState({isJoined: true})
+      return
+      /*
       if (result === "success") {
         this.setState({isJoined: true})
       } else {
         this.setState({failedJoin: true})
       }
+      */
     }
   }
 
@@ -163,7 +169,9 @@ class Team extends Component {
                   <div onClick={async () => {
                     await Backend.setPlantType(account, "corn")
                     await Backend.justPlanted(account)
+                    this.props.afterPlanting()
                     this.setState({isPlanted: true})
+
                     console.log("planted!")
                     }}>
                     <CornLogo/>   

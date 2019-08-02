@@ -37,11 +37,12 @@ class App extends Component {
     // TODO: Use cookies to track user stage in our flow / check active addresses
     //        to differentiate old and new users
     this.state = {
-      web3Loaded: false, isOnboarding: false, hasPlanted: false
+      web3Loaded: false, isOnboarding: false, hasPlanted: false, isJoined: false
     }
     this.web3Loaded = this.web3Loaded.bind(this)
     this.doneOnboarding = this.doneOnboarding.bind(this)
     this.afterPlanting = this.afterPlanting.bind(this)
+    this.afterJoining = this.afterJoining.bind(this)
   }
 
   componentDidMount() {
@@ -58,6 +59,11 @@ class App extends Component {
 
   afterPlanting() {
     this.setState({hasPlanted: true})
+    console.log("Percolate motha fucka")
+  }
+
+  afterJoining() {
+    this.setState({hasJoined: true})
     console.log("Percolate motha fucka")
   }
 
@@ -82,9 +88,9 @@ class App extends Component {
                 <Switch>
                   <Route exact path="/" render={(props) => <Onboarding doneOnboarding={(this.doneOnboarding)} {...props} />} />
                   <Route path="/home" render={(props) => <Home {...props} />} />
-                  <Route exact path="/team" render={(props) => <Team afterPlanting={this.afterPlanting} 
+                  <Route exact path="/team" render={(props) => <Team afterPlanting={this.afterPlanting} afterJoining={this.afterJoining}
                     hasPlanted={this.state.hasPlanted} {...props} />} />
-                  <Route path="/team/:id" render={(props) => <Team afterPlanting={this.afterPlanting} 
+                  <Route path="/team/:id" render={(props) => <Team afterPlanting={this.afterPlanting} afterJoining={this.afterJoining}
                     hasPlanted={this.state.hasPlanted} {...props} />} />
                   <Route path="/profile/:id" render={(props) => <ProfilePage {...props} />} />
                   <Route path="/onboarding" render={(props) => <Onboarding doneOnboarding={(this.doneOnboarding)} {...props} />} />
