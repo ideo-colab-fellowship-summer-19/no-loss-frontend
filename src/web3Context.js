@@ -75,6 +75,11 @@ class GlobalContext extends Component {
           "bees": ["football", "long"],
           "plantType": "corn"
         })
+      Backend.setLocal(accounts[1],
+        {
+          "bees": ["long"],
+          "plantType": "corn"
+        })
     } else if (ENV === "devWithChain") {
       Backend.setLocal(accounts[0],
         {
@@ -89,6 +94,7 @@ class GlobalContext extends Component {
     }
 
     this.props.web3Loaded()
+
   }
 
   render() {

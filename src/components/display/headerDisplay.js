@@ -23,10 +23,11 @@ class HeaderDisplay extends Component {
   render() {
     return (
       <div style={{display: "flex", flexDirection: "column", fontFamily: "SpaceMonoBold",
-        color: "#A5A5A5", fontSize: "14px", paddingBottom: "16px"}}>
+        color: "#A5A5A5", fontSize: "14px", paddingBottom: "16px", alignItems: "center",
+        paddingTop: "15px"}}>
         {this.props.children}
         <div>
-          this.checkPropTypes.displayText
+          {this.props.displayText}
         </div>
       </div>
     )

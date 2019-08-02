@@ -63,8 +63,8 @@ class App extends Component {
           {this.state.web3Loaded ?
               <ScrollToTop>
                 <Switch>
-                  <Route exact path="/" render={(props) => <Home {...props} />} />
-                  <Route exact path="/home" render={(props) => <Home {...props} />} />
+                  <Route exact path="/" render={(props) => <Onboarding {...props} />} />
+                  <Route path="/home" render={(props) => <Home {...props} />} />
                   <Route exact path="/team" render={(props) => <Team {...props} />} />
                   <Route path="/team/:id" render={(props) => <Team {...props} />} />
                   <Route path="/profile/:id" render={(props) => <ProfilePage {...props} />} />

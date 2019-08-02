@@ -14,7 +14,7 @@ const AnimatingSpinnerBigWhite = props => (
       cx={50}
       cy={50}
       fill="none"
-      stroke="#fff"
+      stroke="#CA5B3D"
       strokeWidth={4}
       r={20}
       strokeDasharray="56.548667764616276 20.84955592153876"

@@ -8,6 +8,7 @@ import FatBee from "../../../svg/bee/beeFat.js"
 import FootballBee from "../../../svg/bee/beeFootball.js"
 import LongBee from "../../../svg/bee/beeLong.js"
 import SmallBee from "../../../svg/bee/beeSmall.js"
+import SadBee from "../../../svg/bee/beeSad.js"
 import Backend from "../../../backend.js"
 // import bee names
 
@@ -24,42 +25,48 @@ const Bees = ({ params }) => {
   let isMinimized = params.isMinimized
   console.log("Da Params")
   console.log(params)
-  let toReturn = beeList.map(bee => {
-    switch (bee) {
-      case "fat":
-        return <div className="bee" key={bee}>{
+  let individualStyle = {paddingLeft: "30px"}
+  const toReturn = beeList.map(bee => {
+    if (bee === "fat") {
+      return <div className="bee" key={bee} style={individualStyle}>{
           <FatBee />
         }
         </div>
-      case "cute":
-        return <div className="bee" key={bee}>{
-          <CuteBee />
-        }
-        </div>
-      case "football":
-        return <div className="bee" key={bee}>{
-          <FootballBee />
-        }
-        </div>
-      case "long":
-        return <div className="bee" key={bee}>{
-          <LongBee />
-        }
-        </div>
-      case "small":
-        return <div className="bee" key={bee}>{
-          <SmallBee />
-        }
-        </div>
+    } else if (bee === "football") {
+      return <div className="bee" key={bee} style={individualStyle}>{
+        <FootballBee />
+      }
+      </div>
+    } else if (bee === "long") {
+      return <div className="bee" key={bee} style={individualStyle}>{
+        <LongBee />
+      }
+      </div>
+    } else if (bee === "small") {
+      return <div className="bee" key={bee} style={individualStyle}>{
+        <SmallBee />
+      }
+      </div>
+    } else if (bee === "cute") {
+      return <div className="bee" key={bee} style={individualStyle}>{
+        <CuteBee />
+      }
+      </div>
+    } else if (bee === "sad") {
+      return <div className="bee" key={bee} style={individualStyle}>{
+        <SadBee />
+      }
+      </div>
     }
   })
+  let beeStyle = {display: "flex", flexDirection: "row", alignItems: "center"}
 
   if (isMinimized){
-    return toReturn.slice(4)
+    return <div style={beeStyle}> {toReturn.slice(0, 4)} </div>
   } else {
-    return toReturn
+    return <div style={beeStyle}> {toReturn} </div>
   }
-  };
+};
 
 class TrophyCase extends Component {
   async componentDidMount() {
@@ -75,6 +82,7 @@ class TrophyCase extends Component {
   constructor(props) {
     super(props);
     this.state = {isMinimized: true, numTrophies: this.props.numTrophies, hasLoaded: false}
+    this.changeVisibility = this.changeVisibility.bind(this)
   }
 
   async getBees() {
@@ -98,14 +106,18 @@ class TrophyCase extends Component {
       display: "flex",
       flexDirection: "row",
       justifyContent: "left",
-      paddingLeft: "10px"
+      alignItems: "center",
+      background: "#F1F1F1",
+      paddingLeft: "10px",
+      width: "325px",
+      height: "42px",
+      borderRadius: "30px"
     }
 
     let expandedStyle = {
-      display: "flex",
-      flexDirection: "row",
-      flexWrap: "wrap",
       position: "absolute",
+      paddingTop: "20px",
+      paddingBottom: "20px",
       width: "375px",
       height: "637px",
       top: "134px",
@@ -122,17 +134,23 @@ class TrophyCase extends Component {
         console.log(this.state.bees)
         // minimized one line
         toRender =
+        <div style={{display: "flex", justifyContent: "center"}} >
           <div style={minimizedStyle} onClick={this.changeVisibility}>
-            <Bees params={{ beeList: this.state.bees, isMinimized: this.state.isMinimized }} 
-              style={{display: "flex", flexDirection: "column", justifyContent: "left", 
-              paddingLeft: "5px", paddingRight: "5px"}}/>
-            <LittleRightArrow style={{justifySelf: "right", marginLeft: "5px"}}/>
+            <Bees params={{ beeList: this.state.bees, isMinimized: this.state.isMinimized }}
+              style={{
+                display: "flex", flexDirection: "column", justifyContent: "left",
+                paddingLeft: "5px", paddingRight: "5px"
+              }} />
+            <LittleRightArrow style={{ marginLeft: "auto", marginRight: "12px"}} />
           </div>
+        </div>
+          
       } else {
         // full screen
         toRender = 
           <div style={expandedStyle} onClick={this.changeVisibility}>
-          <Bees params={{ beeList: this.state.bees, isMinimized: this.state.isMinimized }} />
+          <Bees params={{ beeList: this.state.bees, isMinimized: this.state.isMinimized}}
+          style={{ display: "flex", flexDirection: "row", flexWrap: "wrap"}} />
         </div>
       }
     } else {

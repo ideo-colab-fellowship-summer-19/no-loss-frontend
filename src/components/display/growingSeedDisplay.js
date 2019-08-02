@@ -41,7 +41,7 @@ class GrowingSeedDisplay extends Component {
       roundStatus = "early"
     }
 
-    let plantType = Backend.getPlantType(account)
+    let plantType = await Backend.getPlantType(this.props.user)
     this.setState({ hasLoaded: true, roundStatus: roundStatus, plantType: plantType})
   }
 
@@ -54,55 +54,79 @@ class GrowingSeedDisplay extends Component {
   // 
 
   render() {
-    if (!this.hasLoaded) {
-      return <AnimatingSpinnerBigWhite/>
+    if (!this.state.hasLoaded) {
+      return <AnimatingSpinnerBigWhite />
     }
 
     let toRender;
     let plantType = this.state.plantType
+    console.log("the round")
+    console.log(this.state.roundStatus)
     switch(this.state.roundStatus) {
       case "early":
-        if (plantType == "tomatoe") {
+        if (plantType == "tomato") {
           toRender = <TomatoSmall />
         } else if (plantType === "pepper") {
           toRender = <PepperSmall />
         } else if (plantType === "corn") {
           toRender = <CornSmall />
         }
+        break;
       case "middle":
-        if (plantType == "tomatoe") {
+        if (plantType == "tomato") {
           toRender = <TomatoMedium />
         } else if (plantType === "pepper") {
           toRender = <PepperMedium />
         } else if (plantType === "corn") {
           toRender = <CornMedium />
         }
+        break;
 
       case "late":
-        if (plantType == "tomatoe") {
+        if (plantType == "tomato") {
           toRender = <TomatoBig />
         } else if (plantType === "pepper") {
           toRender = <PepperBig />
         } else if (plantType === "corn") {
           toRender = <CornBig />
         }
+        break;
 
       case "finished":
-        if (plantType == "tomatoe") {
+        if (plantType == "tomato") {
           toRender = <TomatoBearingFruit />
         } else if (plantType === "pepper") {
           toRender = <PepperBearingFruit />
         } else if (plantType === "corn") {
           toRender = <CornBearingFruit />
         }
+        break;
 
       default:
         console.log("Error Loading the Growing Seed")
+        throw("growing seed error")
 
+    }
+    let plantStyle = {
+      display: "flex",
+      justifyContent: "center",
+      marginTop: "122px"
+    };
+    if (this.props.isBig) {
+      plantStyle = {
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "122px"
+      };
+    } else {
+      plantStyle = {
+        display: "flex",
+        justifyContent: "center"
+      };
     }
     
     return (
-      <div>
+      <div className={"plantContainer"} style={plantStyle}>
         {toRender}
       </div>
     )

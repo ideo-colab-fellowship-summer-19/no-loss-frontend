@@ -55,6 +55,10 @@ if (ENV == "devWithChain") {
         })
     }
 
+    async getUserById() {
+
+    }
+
     async getSeedCount() {
       this.getPoolData.then((result) => {
         let totalPrinciple = parseFloat(result.entryTotal)
@@ -83,6 +87,21 @@ if (ENV == "devWithChain") {
       this.web3 = context.web3
     }
 
+    async getUserDataById(userId) {
+      return {
+        addr: this.context.account + "?",
+        username: "the dude",
+        totalAmount: 30,
+        totalTickets: 3,
+        activeAmount: 20,
+        activeTickets: 2,
+        pendingAmount: 10,
+        pendingTickets: 1,
+        totalWinnings: 0,
+        groupId: 0
+      }
+    }
+
     async getPoolData() {
       return {
         entryTotal: 100,
@@ -108,6 +127,17 @@ if (ENV == "devWithChain") {
         pendingTickets: 1,
         totalWinnings: 0,
         groupId: 0
+      }
+    }
+
+    async getGroupData(groupId) {
+      // getGroup(uint groupId)
+      console.log("web3")
+      console.log(this.web3)
+      let accounts = await this.web3.eth.getAccounts()
+      return {
+        members: [accounts[0], accounts[1]],
+        allowedEntrants: []
       }
     }
 
