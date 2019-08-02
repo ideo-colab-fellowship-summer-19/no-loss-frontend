@@ -37,9 +37,11 @@ class App extends Component {
     // TODO: Use cookies to track user stage in our flow / check active addresses
     //        to differentiate old and new users
     this.state = {
-      web3Loaded: false
+      web3Loaded: false, isOnboarding: false, hasPlanted: false
     }
     this.web3Loaded = this.web3Loaded.bind(this)
+    this.doneOnboarding = this.doneOnboarding.bind(this)
+    this.afterPlanting = this.afterPlanting.bind(this)
   }
 
   componentDidMount() {
@@ -50,6 +52,15 @@ class App extends Component {
     this.setState({web3Loaded: true})
   }
 
+  doneOnboarding() {
+    this.setState({isOnboarding: false})
+  }
+
+  afterPlanting() {
+    this.setState({hasPlanted: true})
+    console.log("Percolate motha fucka")
+  }
+
   
   render() {
     // useful things
@@ -57,21 +68,29 @@ class App extends Component {
     // {bool ? ifSo : ifNot}
     // takes exact path ="" render={(props => <ThingToRender />)}
     let web3Context = {web3: "web3dummy", address: "addressDummy", pool: "poolDummy"}
+    let menu = <div> </div>
+    console.log(!this.state.isOnboarding)
+    if (!this.state.isOnboarding) {
+      console.log("im here")
+      menu = <MenuBar />
+    }
     return (
       <Router>
         <GlobalContext web3Loaded={this.web3Loaded}>
           {this.state.web3Loaded ?
               <ScrollToTop>
                 <Switch>
-                  <Route exact path="/" render={(props) => <Onboarding {...props} />} />
+                  <Route exact path="/" render={(props) => <Onboarding doneOnboarding={(this.doneOnboarding)} {...props} />} />
                   <Route path="/home" render={(props) => <Home {...props} />} />
-                  <Route exact path="/team" render={(props) => <Team {...props} />} />
-                  <Route path="/team/:id" render={(props) => <Team {...props} />} />
+                  <Route exact path="/team" render={(props) => <Team afterPlanting={this.afterPlanting} 
+                    hasPlanted={this.state.hasPlanted} {...props} />} />
+                  <Route path="/team/:id" render={(props) => <Team afterPlanting={this.afterPlanting} 
+                    hasPlanted={this.state.hasPlanted} {...props} />} />
                   <Route path="/profile/:id" render={(props) => <ProfilePage {...props} />} />
-                  <Route path="/onboarding" render={(props) => <Onboarding {...props} />} />
+                  <Route path="/onboarding" render={(props) => <Onboarding doneOnboarding={(this.doneOnboarding)} {...props} />} />
                   <Route path="/settings" render={(props) => <Settings {...props} />} />
                 </Switch>
-                <MenuBar />
+                { menu }
               </ScrollToTop>
             :
             <AnimatingSpinnerBigWhite />

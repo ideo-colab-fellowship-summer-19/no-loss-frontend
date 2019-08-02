@@ -16,10 +16,63 @@ import TomatoBig from "../../svg/tomato/tomatoBig.js"
 import TomatoMedium from "../../svg/tomato/tomatoMedium.js"
 import TomatoSmall from "../../svg/tomato/tomatoSmall"
 import { COUNTER_END_DATE } from "../../config.js"
+import lottie from 'lottie-web'
 
 let web3;
 let account;
 let pool;
+
+const cornAnimation = lottie.loadAnimation({
+  container: burger,
+  renderer: 'svg',
+  loop: true,
+  autoplay: true,
+  animationData: burgerData,
+});
+
+const pepperAnimation = lottie.loadAnimation({
+  container: burger,
+  renderer: 'svg',
+  loop: true,
+  autoplay: true,
+  animationData: burgerData,
+});
+
+const tomatoAnimation = lottie.loadAnimation({
+  container: burger,
+  renderer: 'svg',
+  loop: true,
+  autoplay: true,
+  animationData: burgerData,
+});
+
+const beeAnimation = lottie.loadAnimation({
+  container: burger,
+  renderer: 'svg',
+  loop: true,
+  autoplay: true,
+  animationData: burgerData,
+});
+
+const daiAnimation = lottie.loadAnimation({
+  container: burger,
+  renderer: 'svg',
+  loop: true,
+  autoplay: true,
+  animationData: burgerData,
+});
+
+const seedAnimation = lottie.loadAnimation({
+  container: burger,
+  renderer: 'svg',
+  loop: true,
+  autoplay: true,
+  animationData: burgerData,
+});
+
+let openAnimation;
+let winAnimation;
+let userData
 
 class GrowingSeedDisplay extends Component {
   async componentDidMount() {
@@ -41,13 +94,36 @@ class GrowingSeedDisplay extends Component {
       roundStatus = "early"
     }
 
+
     let plantType = await Backend.getPlantType(this.props.user)
-    this.setState({ hasLoaded: true, roundStatus: roundStatus, plantType: plantType})
+    userData = await Backend.getUserData()
+    if (plantType === "corn") {
+      openAnimation = cornAnimation
+    } else if (plantType === "tomato") {
+      openAnimation = tomatoAnimation 
+    } else {
+      openAnimation = pepperAnimation
+    }
+
+    let isWinner = false;
+
+    if (userData.totalWinnings > 0) {
+      isWinner = true;
+    }
+
+    
+    this.setState({ hasLoaded: true, roundStatus: roundStatus, plantType: plantType,
+      isWinner: isWinner})
   }
 
   constructor(props) {
     super(props);
-    this.state = { hasLoaded: false }
+    this.state = { hasLoaded: false, drawingStatus: 0 }
+  }
+
+  drawing() {
+    //TODO: Drawing logic
+    
   }
 
   // I need to get gameState aka distanceToDrawing (hardcoded for 5 on friday)
@@ -56,6 +132,18 @@ class GrowingSeedDisplay extends Component {
   render() {
     if (!this.state.hasLoaded) {
       return <AnimatingSpinnerBigWhite />
+    }
+
+    let drawingFunction = () => {return}
+    if (new Date() > new Date(COUNTER_END_DATE) && this.state.drawingStatus < 2) {
+      drawingFunction = () => {
+        if (this.state.drawingStatus === 1) {
+          // animation on click
+          if ()
+        }
+        curStatus = this.state.drawingStatus
+        this.setState({drawingStatus: curStatus + 1})
+      }
     }
 
     let toRender;
@@ -107,16 +195,22 @@ class GrowingSeedDisplay extends Component {
         throw("growing seed error")
 
     }
+    let theDrawing = <div> </div>
+    if (this.state.drawingStatus === 1) {
+      theDrawing = <DrawingFlow theAccount={account} userData={userData} isWinner={this.state.isWinner}
+        plantType={this.state.plantType}/>
+    }
+
     let plantStyle = {
       display: "flex",
       justifyContent: "center",
-      marginTop: "122px"
+      marginTop: "90px"
     };
     if (this.props.isBig) {
       plantStyle = {
         display: "flex",
         justifyContent: "center",
-        marginTop: "122px"
+        marginTop: "90px"
       };
     } else {
       plantStyle = {
@@ -126,8 +220,9 @@ class GrowingSeedDisplay extends Component {
     }
     
     return (
-      <div className={"plantContainer"} style={plantStyle}>
+      <div className={"plantContainer"} style={plantStyle} onClick={this.drawing}>
         {toRender}
+        {theDrawing}
       </div>
     )
   }

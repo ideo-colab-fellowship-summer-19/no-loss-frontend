@@ -138,6 +138,25 @@ if (ENV === "devWithChain") {
       return curUser.plantType
     }
 
+    static async setPlantType(account, plant) {
+      let curUser = getFromLocalInternal(account)
+      curUser.plantType = plant
+      this.setLocal(account, curUser)
+      return curUser.plantType
+    }
+
+    static async justPlanted(account) {
+      let curUser = getFromLocalInternal(account)
+      curUser.isPlanted = true
+      this.setLocal(account, curUser)
+      return curUser.plantType
+    }
+
+    static async isPlanted(account) {
+      let curUser = getFromLocalInternal(account)
+      return curUser.isPlanted
+    }
+
     // to Post
     // data = new FormData();
     // data.append("thing", thing)
