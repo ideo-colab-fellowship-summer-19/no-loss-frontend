@@ -48,9 +48,10 @@ class GlobalContext extends Component {
       
       
     } else {
-      web3 = new Web3(new Web3.providers.HttpProvider(
-        'mainnet.infura.io/v3/cb06dad7697b45b3999d15a8745be75c'
-      ));
+      // web3 = new Web3(new Web3.providers.HttpProvider(
+      //   'https://mainnet.infura.io/v3/cb06dad7697b45b3999d15a8745be75c'
+      // ));
+      web3 = new Web3(Web3.givenProvider);
     }
     console.log("My thing")
     console.log(web3)
@@ -60,6 +61,8 @@ class GlobalContext extends Component {
     console.log("pool")
     console.log(pool)
     accounts = await web3.eth.getAccounts()
+    console.log("the accounts")
+    console.log(accounts)
   }
   
   componentWillMount() {
@@ -85,7 +88,10 @@ class GlobalContext extends Component {
     }
     // dev only
     if (ENV === "devNoChain") {
-      if (!Backend.userExists(accounts[0])) {
+      console.log("Here in the chain")
+      let existence = await Backend.userExists(accounts[0])
+      if (!existence) {
+        console.log("we good")
         let curUser = {
           "bees": [],
           "plantType": "",

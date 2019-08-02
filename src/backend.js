@@ -140,7 +140,10 @@ if (ENV === "devWithChain") {
     }
 
     static async userExists(address) {
+      console.log(address)
       let curUser = getFromLocalInternal(address)
+      console.log('existence')
+      console.log(curUser)
       if (curUser) {
         return true
       } else {

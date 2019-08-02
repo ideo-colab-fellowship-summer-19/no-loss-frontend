@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Web3Context } from "../../../web3Context.js";
 import Blockchain from "../../../blockchain.js";
+import Backend from "../../../backend.js";
+
 import AnimatingSpinnerBigWhite from "../../../svg/animating-spinner-big-white.js"
 
 let poolData;
@@ -10,6 +12,7 @@ let userData;
 let web3;
 let account;
 let pool;
+let totalSeeds;
 
 class DrawingInfo extends Component {
   async componentDidMount() {
@@ -21,6 +24,11 @@ class DrawingInfo extends Component {
     this.blockchain = new Blockchain(this.context)
     poolData = await this.blockchain.getPoolData()
     userData = await this.blockchain.getUserData()
+    console.log("account man")
+    console.log(account)
+    totalSeeds = await Backend.getTotalSeeds(this.account)
+    console.log("seed man")
+    console.log(totalSeeds)
     console.log("Drawing did mount")
     console.log(poolData)
     console.log(userData)
@@ -74,14 +82,14 @@ class DrawingInfo extends Component {
             you have 
             <div style={{fontFamily: "SpaceMonoBold", paddingLeft: "7px", paddingBottom: "3px"}}>
               {
-                userData.totalTickets == 1 ?
-                userData.totalTickets + " seed" :
-                userData.totalTickets + " seeds"
+                totalSeeds === 1 ?
+                totalSeeds + " seed" :
+                totalSeeds + " seeds"
               }
             </div>
           </div>
           <div>
-            {seedCount} seeds planted
+            {totalSeeds} seeds planted
           </div>
         </div>
       </div>
