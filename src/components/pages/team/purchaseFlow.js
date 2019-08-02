@@ -84,7 +84,7 @@ class PurchaseFlow extends Component {
       paddingTop: "27px",
       background: "#F1F1F1",
       width: "282px",
-      height: "310px",
+      height: "220px",
       marginTop: "20px",
       alignItems: "center",
       borderRadius: "20px"
@@ -138,32 +138,27 @@ class PurchaseFlow extends Component {
       toReturn = 
       <div style={{display: "flex", flexDirection: "column", alignItems: "center",
         justifyContent: "space-between", padding: "20px",
-        paddingTop: "27px",
+        paddingTop: "10px",
+        paddingBottom: "13px",
         background: "#F1F1F1",
         width: "282px",
-        height: "310px",
+        height: "240px",
         marginTop: "20px",
         borderRadius: "20px"}}>
         <div style={{
             fontFamily: "WorkSansBold", color: "#C4C4C4", fontSize: "14px",
-            borderRadius: "3px", display: "flex", flexDirection: "column"
+            borderRadius: "3px", display: "flex", flexDirection: "column",
+            alignItems: "center"
           }}>
           <div onClick={this.setTen} style = {clickedStyle}>
             +1
           </div>
           <div style = {daiStyle}>
-            <MiniDaiGrey style={{marginRight: "2px"}}/> 5 DAI
+            <MiniDaiGrey style={{marginRight: "2px"}}/> 5 DAI (Pending Confirmation)
           </div>
         </div>
-        <div style={{
-            fontFamily: "WorkSansBold", color: "#A5A5A5", fontSize: "9px",
-            borderRadius: "3px", display: "flex", flexDirection: "row",
-            textAlign: "center"
-          }}>
-          (Pending Confirmation. May take a few minutes to register on the interface.)
-        </div>
-        <div style={{fontFamily: "SpaceMonoReg", fontSize: "11px", lineHeight: "16px"}}>
-          <div style={{marginBottom: "16px"}}>
+        <div style={{fontFamily: "SpaceMonoReg", fontSize: "11px", lineHeight: "12px"}}>
+          <div style={{marginBottom: "12px"}}>
             With automatic planting, you can grow your harvest effortlessly and transfer out
             any time.
           </div>
@@ -195,27 +190,30 @@ class PurchaseFlow extends Component {
     } else {
       toReturn = 
       <div style={purchaseFlowStyle}>
-        <div className={"seedCount"} style={{
-          display: "flex", flexDirection: "row", marginTop: "-20px", justifyContent: "space-between",
-          marginRight: "20px"
-        }}>
-          <div style={{fontFamily: "SpaceMonoReg", fontSize: "11px"}}>
-            your seeds:
-          </div>
-          <div>
-            <div style={{display: "flex", flexDirection: "column", 
-              fontFamily: "WorkSansBold", fontSize: "14px", alignItems: "center"}}>
-              <div style={{marginBottom: "7px"}}>
-                {totalSeeds}
-              </div>
-              <div style={{fontSize:"9px", color: "#A5A5A5", display: "flex", flexDirection: "column", justifyContent: "center", alignItems:"center"}}>
-                <div style={{marginBottom: "3px"}}>
-                  <MiniDaiGrey/> 5 DAI 
+        <div style={{display: "flex", justifyContent:"left"}}>
+
+          <div className={"seedCount"} style={{
+            display: "flex", flexDirection: "row", marginTop: "-8px", justifyContent: "space-between",
+            marginRight: "20px", width:"260px"
+          }}>
+            <div style={{fontFamily: "SpaceMonoReg", fontSize: "11px"}}>
+              your seeds:
+            </div>
+            <div>
+              <div style={{display: "flex", flexDirection: "column", 
+                fontFamily: "WorkSansBold", fontSize: "14px", alignItems: "center"}}>
+                <div style={{marginBottom: "7px"}}>
+                  {totalSeeds}
                 </div>
-                <div>
-                  $ 5 USD
+                <div style={{fontSize:"9px", color: "#A5A5A5", display: "flex", flexDirection: "column", justifyContent: "center", alignItems:"center"}}>
+                  <div style={{marginBottom: "3px"}}>
+                    <MiniDaiGrey/> 5 DAI 
+                  </div>
+                  <div>
+                    $ 5 USD
+                  </div>
+                  
                 </div>
-                
               </div>
             </div>
           </div>
@@ -274,7 +272,7 @@ class PurchaseFlow extends Component {
           borderRadius: "13.5px", width: "83px", height: "27px", color: "#FFFFFF",
           fontFamily: "SpaceMonoBold", fontSize: "11px", display: "flex",
           alignItems: "center", justifyContent: "center", bottom: 0, left: "240px",
-          top: "300px", marginLeft: "190px", marginTop: "20px"
+          top: "220px", marginLeft: "190px", marginTop: "20px"
           }}>
             Confirm
           </div>

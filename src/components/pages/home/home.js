@@ -58,7 +58,7 @@ class Home extends Component {
       borderRadius: "7px",
       position: "absolute",
       left: "12.5px",
-      top: "367px",
+      top: "317px",
       marginLeft: "7px",
       cursor: "pointer"
     }

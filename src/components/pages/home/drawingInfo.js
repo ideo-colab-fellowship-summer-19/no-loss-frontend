@@ -45,11 +45,11 @@ class DrawingInfo extends Component {
   render() {
     let drawingInfoStyle = {
       width: "294px",
-      height: "147px",
+      height: "137px",
       left: "42px",
       top: "94px",
-      paddingTop: "25px",
-      paddingBottom: "28px",
+      paddingTop: "15px",
+      paddingBottom: "23px",
       paddingLeft: "10px",
       paddingRight: "10px",
       background: "linear-gradient(162.46deg, #F05025 9.77%, #FEC600 101.77%)",
@@ -74,7 +74,7 @@ class DrawingInfo extends Component {
         <div className="prize-pool-title">
           Prize Pool
         </div>
-        <div className="prize-amount" style={{fontFamily: "CircularStdReg", fontSize: "72px", paddingBottom: "10px"}}>
+        <div className="prize-amount" style={{fontFamily: "CircularStdReg", fontSize: "64px", paddingBottom: "6px"}}>
           {poolData.estimatedInterestFixedPoint18}
         </div>
         <div className="prize-pool-copy" style={{fontFamily: "SpaceMonoReg", fontSize: "12px" }}>
@@ -89,7 +89,7 @@ class DrawingInfo extends Component {
             </div>
           </div>
           <div>
-            {totalSeeds} seeds planted
+            {seedCount} seeds planted
           </div>
         </div>
       </div>

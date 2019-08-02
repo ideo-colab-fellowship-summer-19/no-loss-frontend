@@ -53,9 +53,6 @@ class Team extends Component {
     console.log(teamInfo)
     this.setState({hasLoaded: true, isPurchasing: false, isPlanted: isPlanted,
       isJoined: isJoined, value: "" , teamId: teamId, failedJoin: false})
-    this.setTeam = this.setTeam.bind(this);
-    this.skipTeam = this.skipTeam.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -68,6 +65,9 @@ class Team extends Component {
       hasLoaded: false
     }
     this.togglePurchase = this.togglePurchase.bind(this)
+    this.setTeam = this.setTeam.bind(this);
+    this.skipTeam = this.skipTeam.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   togglePurchase() {
@@ -105,11 +105,11 @@ class Team extends Component {
 
   render() {
     let statsDisplayPosition = {
-      position: "absolute", left: "225px", top: "579px"
+      position: "absolute", left: "225px", top: "420px"
     }
 
     let teamPosition = {
-      position: "absolute", top: "687px"
+      position: "absolute", top: "520px"
     }
     let textToDisplay;
     console.log("Loaded")
@@ -127,7 +127,7 @@ class Team extends Component {
             <div className="mainContent">
               <TrophyCase numTrophies={1} />
               <PurchaseFlow togglePurchase={this.togglePurchase}/>
-              <div style={{ paddingTop: "30px", position: "absolute", left: "17px", top: "579px"}}>
+              <div style={{ paddingTop: "30px", position: "absolute", left: "17px", top: "420px"}}>
               <TeamStatsDisplay teamInfo={teamInfo} prizeInfo={prizeAmount} 
                 togglePurchase={this.togglePurchase} style={statsDisplayPosition}/>
               </div>
@@ -156,7 +156,7 @@ class Team extends Component {
                 height: "113px", width: "217px",
                 display: "flex", flexDirection: "column",
                 justifyContent: "space-between", alignItems: "center",
-                left: "29px", top: "291px", background: "#F1F1F1",
+                left: "29px", top: "210px", background: "#F1F1F1",
                 borderRadius: "20px", position: "absolute"
               }}>
                 <div style={{fontFamily: "SpaceMonoBold", fontSize:"11px",
@@ -199,7 +199,7 @@ class Team extends Component {
                   </div>
                 </div>
               </div>
-              <div style={{ paddingTop: "30px", position: "absolute", left: "17px", top: "579px"}}>
+              <div style={{ paddingTop: "30px", position: "absolute", left: "17px", top: "420px"}}>
                 <TeamStatsDisplay teamInfo={teamInfo} prizeInfo={prizeAmount} 
                   togglePurchase={this.togglePurchase} style={statsDisplayPosition}/>
               </div>
@@ -228,7 +228,7 @@ class Team extends Component {
                 height: "160px", width: "217px",
                 display: "flex", flexDirection: "column",
                 justifyContent: "space-between", alignItems: "center",
-                left: "29px", top: "291px", background: "#F1F1F1",
+                left: "29px", top: "190px", background: "#F1F1F1",
                 borderRadius: "20px", position: "absolute", fontFamily: "SpaceMonoBold",
                 fontSize: "14px"
               }}>
@@ -263,7 +263,7 @@ class Team extends Component {
                     Nah
                 </div>
               </div>
-              <div style={{ paddingTop: "30px", position: "absolute", left: "17px", top: "579px"}}>
+              <div style={{ paddingTop: "30px", position: "absolute", left: "17px", top: "420px"}}>
                 <TeamStatsDisplay teamInfo={teamInfo} prizeInfo={prizeAmount} 
                   togglePurchase={this.togglePurchase} style={statsDisplayPosition}/>
               </div>
@@ -283,7 +283,7 @@ class Team extends Component {
             <div className="mainContent">
               <TrophyCase numTrophies={1} />
               <GrowingSeedDisplay isBig={true} user={account} />
-              <div style={{ paddingTop: "30px", position: "absolute", left: "17px", top: "579px"}}>
+              <div style={{ paddingTop: "30px", position: "absolute", left: "17px", top: "420px"}}>
                 <TeamStatsDisplay teamInfo={teamInfo} prizeInfo={prizeAmount} 
                   togglePurchase={this.togglePurchase} style={statsDisplayPosition}/>
               </div>

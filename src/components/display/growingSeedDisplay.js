@@ -213,14 +213,14 @@ class GrowingSeedDisplay extends Component {
     let plantStyle = {
       display: "flex",
       justifyContent: "center",
-      marginTop: "80px"
+      marginTop: "40px"
     };
     if (this.props.isBig) {
       plantStyle = {
         display: "flex",
         justifyContent: "center",
         position: "absolute",
-        bottom: "280px",
+        bottom: "225px",
         left: "82px"
       };
     } else {
@@ -228,7 +228,7 @@ class GrowingSeedDisplay extends Component {
         display: "flex",
         justifyContent: "center",
         position: "absolute",
-        bottom: "280px",
+        bottom: "225px",
         left: "82px"
       };
     }
@@ -237,7 +237,7 @@ class GrowingSeedDisplay extends Component {
       plantStyle = {
         display: "flex",
         justifyContent: "center",
-        marginTop: "80px"
+        marginTop: "40px"
       };
     } 
     
