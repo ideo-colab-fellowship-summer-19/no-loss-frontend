@@ -70,12 +70,17 @@ class TrophyCase extends Component {
       justifyContent: "left",
       alignItems: "center",
       background: "#F1F1F1",
-      paddingLeft: "10px",
-      width: "325px",
-      height: "113.5px",
+      paddingLeft: "30px",
+      paddingRight: "30px",
+      paddingTop: "10px",
+      width: "315px",
+      height: "70px",
       borderTopLeftRadius: "30px",
       borderTopRightRadius: "30px",
       boxShadow: "0px -1px 4px rgba(0, 0, 0, 0.15)",
+      fontFamily: "SpaceMonoReg",
+      display: "flex", justifyContent: "center", fontSize: "12px",
+      background: "white"
     }
 
     let expandedStyle = {
@@ -123,8 +128,7 @@ class TrophyCase extends Component {
    toRender = "The ability to see your teammate's avatars is coming soon!"
 
     return (
-      <div style={{fontFamily: "SpaceMonoReg", paddingLeft: "10px", paddingRight: "10px",
-      display: "flex", justifyContent: "center", fontSize: "12px"}}>
+      <div style={minimizedStyle}>
         {toRender}
       </div>
     )

@@ -26,6 +26,12 @@ const Bees = ({ params }) => {
   console.log("Da Params")
   console.log(params)
   let individualStyle = {paddingLeft: "30px"}
+  if (beeList.length === 0 ) {
+    return( 
+    <div style={{fontFamily: "SpaceMonoReg", fontSize: "11px"}}>
+      You haven't won any trophies yet!
+    </div>)
+  }
   const toReturn = beeList.map(bee => {
     if (bee === "fat") {
       return <div className="bee" key={bee} style={individualStyle}>{
@@ -125,7 +131,8 @@ class TrophyCase extends Component {
       boxShadow: "0px -1px 4px rgba(0, 0, 0, 0.15)",
       borderTopLeftRadius: "30px",
       borderTopRightRadius: "30px",
-      overflow: "scroll"
+      overflow: "scroll",
+      zIndex: "2"
     }
 
 

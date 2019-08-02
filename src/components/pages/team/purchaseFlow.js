@@ -37,6 +37,7 @@ class PurchaseFlow extends Component {
     this.setFive = this.setFive.bind(this);
     this.setTen = this.setTen.bind(this);
     this.setTwenty = this.setTwenty.bind(this);
+    this.autoPlant = this.autoPlant.bind(this);
   }
 
   setOne() {
@@ -82,7 +83,7 @@ class PurchaseFlow extends Component {
       width: "282px",
       height: "310px",
       marginTop: "20px",
-      alignItmes: "center",
+      alignItems: "center",
       borderRadius: "20px"
     }
 

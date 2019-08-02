@@ -69,16 +69,11 @@ class GlobalContext extends Component {
   async componentDidMount() {
     await this.fetchData();
     this.setState({ web3: web3, account: accounts[0], pool: pool })
-    if (ENV === "devNoChain") {
+    if (ENV === "devWithChain") {
       Backend.setLocal(accounts[0], 
         {
-          "bees": ["football", "long"],
-          "plantType": "corn"
-        })
-      Backend.setLocal(accounts[1],
-        {
-          "bees": ["long"],
-          "plantType": "corn"
+          "bees": [],
+          "plantType": ""
         })
     } else if (ENV === "devWithChain") {
       Backend.setLocal(accounts[0],
@@ -89,7 +84,7 @@ class GlobalContext extends Component {
     }
     // dev only
     if (ENV === "devNoChain") {
-      let curUser = {bees: ["football", "small"], plantType: "tomato"}
+      let curUser = {bees: [], plantType: "tomato"}
       Backend.setLocal(accounts[0], curUser)
     }
 

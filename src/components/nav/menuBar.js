@@ -37,7 +37,8 @@ class MenuBar extends Component {
       bottom: "0",
       alignItems: "center",
       justifyContent: "space-between",
-      zIndex: "999"
+      zIndex: "999",
+      background: "white"
     }
 
     let menuElementStyle = {

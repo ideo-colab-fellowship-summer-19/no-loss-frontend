@@ -17,10 +17,15 @@ import TomatoMedium from "../../svg/tomato/tomatoMedium.js"
 import TomatoSmall from "../../svg/tomato/tomatoSmall"
 import { COUNTER_END_DATE } from "../../config.js"
 import lottie from 'lottie-web'
+import Blockchain from "../../blockchain.js"
+import DrawingFlow from "./drawingFlow.js"
 
 let web3;
 let account;
 let pool;
+let burger = 0;
+let burgerData = 0;
+let curStatus;
 
 const cornAnimation = lottie.loadAnimation({
   container: burger,
@@ -73,18 +78,24 @@ const seedAnimation = lottie.loadAnimation({
 let openAnimation;
 let winAnimation;
 let userData
+let blockchain;
 
 class GrowingSeedDisplay extends Component {
   async componentDidMount() {
     web3 = this.context.web3
     account = this.context.account
     pool = this.context.pool
+    blockchain = new Blockchain(this.context)
     let drawingDate = new Date(COUNTER_END_DATE)
     let currentDate = new Date()
     let timeDiff = drawingDate - currentDate
     let timeDiffMinutes = Math.floor(timeDiff / 1000 / 60 / 60 / 60);
     let roundStatus = "unset";
-    if (currentDate > drawingDate) {
+    console.log("upupupup")
+    console.log(this.state.drawingFinished)
+    if (this.state.drawingFinished) {
+      roundStatus = "early"
+    } else if (currentDate > drawingDate) {
       roundStatus = "finished"
     } else if (timeDiffMinutes < 30) {
       roundStatus = "late"
@@ -94,9 +105,13 @@ class GrowingSeedDisplay extends Component {
       roundStatus = "early"
     }
 
+    roundStatus = "finished";
+
 
     let plantType = await Backend.getPlantType(this.props.user)
-    userData = await Backend.getUserData()
+    console.log("the plant type")
+    console.log(plantType)
+    userData = await blockchain.getUserData()
     if (plantType === "corn") {
       openAnimation = cornAnimation
     } else if (plantType === "tomato") {
@@ -113,38 +128,30 @@ class GrowingSeedDisplay extends Component {
 
     
     this.setState({ hasLoaded: true, roundStatus: roundStatus, plantType: plantType,
-      isWinner: isWinner})
+      isWinner: isWinner, drawingFinished: false})
   }
 
   constructor(props) {
     super(props);
     this.state = { hasLoaded: false, drawingStatus: 0 }
+    this.endDrawing = this.endDrawing.bind(this)
   }
 
-  drawing() {
-    //TODO: Drawing logic
-    
+  endDrawing() {
+    this.setState({drawingFinished: true})
+    this.setState({roundStatus: "early"})
   }
 
   // I need to get gameState aka distanceToDrawing (hardcoded for 5 on friday)
   // 
 
   render() {
+    console.log('rendering')
+    console.log(this.state.drawingFinished)
     if (!this.state.hasLoaded) {
       return <AnimatingSpinnerBigWhite />
     }
 
-    let drawingFunction = () => {return}
-    if (new Date() > new Date(COUNTER_END_DATE) && this.state.drawingStatus < 2) {
-      drawingFunction = () => {
-        if (this.state.drawingStatus === 1) {
-          // animation on click
-          if ()
-        }
-        curStatus = this.state.drawingStatus
-        this.setState({drawingStatus: curStatus + 1})
-      }
-    }
 
     let toRender;
     let plantType = this.state.plantType
@@ -162,7 +169,7 @@ class GrowingSeedDisplay extends Component {
         break;
       case "middle":
         if (plantType == "tomato") {
-          toRender = <TomatoMedium />
+          toRender = <TomatoMedium/>
         } else if (plantType === "pepper") {
           toRender = <PepperMedium />
         } else if (plantType === "corn") {
@@ -182,11 +189,20 @@ class GrowingSeedDisplay extends Component {
 
       case "finished":
         if (plantType == "tomato") {
-          toRender = <TomatoBearingFruit />
+          toRender = 
+          <DrawingFlow endDrawing={this.endDrawing} fruit={"tomato"}>
+            <TomatoBearingFruit/>
+          </DrawingFlow>
         } else if (plantType === "pepper") {
-          toRender = <PepperBearingFruit />
+          toRender = 
+          <DrawingFlow endDrawing={this.endDrawing} fruit={"pepper"}>
+            <PepperBearingFruit/>
+          </DrawingFlow>
         } else if (plantType === "corn") {
-          toRender = <CornBearingFruit />
+          toRender = 
+          <DrawingFlow endDrawing={this.endDrawing} fruit={"corn"}>
+            <CornBearingFruit/>
+          </DrawingFlow>
         }
         break;
 
@@ -195,34 +211,41 @@ class GrowingSeedDisplay extends Component {
         throw("growing seed error")
 
     }
-    let theDrawing = <div> </div>
-    if (this.state.drawingStatus === 1) {
-      theDrawing = <DrawingFlow theAccount={account} userData={userData} isWinner={this.state.isWinner}
-        plantType={this.state.plantType}/>
-    }
 
     let plantStyle = {
       display: "flex",
       justifyContent: "center",
-      marginTop: "90px"
+      marginTop: "80px"
     };
     if (this.props.isBig) {
       plantStyle = {
         display: "flex",
         justifyContent: "center",
-        marginTop: "90px"
+        position: "absolute",
+        bottom: "280px",
+        left: "82px"
       };
     } else {
       plantStyle = {
         display: "flex",
-        justifyContent: "center"
+        justifyContent: "center",
+        position: "absolute",
+        bottom: "280px",
+        left: "82px"
       };
     }
+
+    if (this.state.roundStatus === "finished") {
+      plantStyle = {
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "80px"
+      };
+    } 
     
     return (
       <div className={"plantContainer"} style={plantStyle} onClick={this.drawing}>
         {toRender}
-        {theDrawing}
       </div>
     )
   }

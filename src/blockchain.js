@@ -130,6 +130,25 @@ if (ENV == "devWithChain") {
       }
     }
 
+    async getTeamInfo(account) {
+      // get members and id
+      console.log("here in afdas")
+      let result = {
+        members: ["0x6e14e8534f48f15b8f2518a07fa60e90b887a538, 0x1111e8534f48f15b8f2518a07fa60e90b887a538, \
+        0x2222e8534f48f15b8f2518a07fa60e90b887a538"],
+        name: "The Squad",
+        totalSeeds: 121,
+        id: 1
+      }
+      return result
+    }
+
+    // TODO: account joins username
+    async joinTeam(account, username) {
+      let result = "success"
+      return result
+    }
+
     async getGroupData(groupId) {
       // getGroup(uint groupId)
       console.log("web3")

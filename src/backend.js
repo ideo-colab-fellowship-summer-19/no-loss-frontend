@@ -109,10 +109,35 @@ if (ENV === "devWithChain") {
       return result
     }
 
+    static async registerAutoPlant() {
+      return
+    }
+
     static async getTeamPhoto(address) {
       // TODO:
       let result = "dummy"
       return result
+    }
+
+    static async addBee(account, beeNum) {
+      let curUser = getFromLocalInternal(account)
+      let bees = curUser.bees
+      if (beeNum === "1") {
+        bees.push("football")
+      } else if (beeNum === "2") {
+        bees.push("cute")
+      } else if (beeNum === "3") {
+        bees.push("long")
+      } else if (beeNum === "4") {
+        bees.push("sad")
+      } else if (beeNum === "5") {
+        bees.push("small")
+      } else if (beeNum === "6") {
+        bees.push("fat")
+      }
+      curUser.bees = bees
+
+      setLocalInternal(account, curUser)
     }
 
     static async getBees(account) {
@@ -124,13 +149,7 @@ if (ENV === "devWithChain") {
       console.log("the user")
       console.log(curUser)
       curUser.bees = bees
-      localStorage.setLocalInternal(account, curUser)
-    }
-
-    static async addBee(account, bee) {
-      let curUser = getFromLocalInternal(account)
-      curUser.bees = curUser.bees.push(bee)
-      localStorage.setLocalInternal(account, curUser)
+      setLocalInternal(account, curUser)
     }
 
     static async getPlantType(account) {
