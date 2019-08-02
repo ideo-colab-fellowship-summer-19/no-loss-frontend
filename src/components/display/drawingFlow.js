@@ -140,7 +140,7 @@ class DrawingFlow extends Component {
         toRender = 
         <div style={{zIndex: "999", display: "flex", justifyContent: "center", 
           alignItems: "center", flexDirection: "column", position: "absolute", 
-          top: "150px", left: "24px", zIndex: "999"}} onClick={this.increment}>
+          top: "100px", left: "24px", zIndex: "999"}} onClick={this.increment}>
           <div style={{fontFamily: "SpaceMonoBold", fontSize: "12px",
             background:"#F1F1F1", borderRadius: "20px", display: "flex",
             flexDirection: "column", alignItems: "center", marginBottom: "15px"}}>
@@ -175,7 +175,7 @@ class DrawingFlow extends Component {
         toRender = 
         <div style={{zIndex: "999", display: "flex", flexDirection: "column",
           justifyContent: "center", 
-          alignItems: "center", position: "absolute", top: "150px", left: "24px",
+          alignItems: "center", position: "absolute", top: "100px", left: "24px",
           zIndex: "999"}} onClick={this.increment}>
           <BeeWin style={{marginBottom: "15px"}}/>
           <YourSeeds style={{marginBottom: "15px"}}/>

@@ -97,6 +97,7 @@ class GrowingSeedDisplay extends Component {
     if (this.state.drawingFinished) {
       roundStatus = "early"
     } else if (currentDate > drawingDate) {
+      console.log("FINISH HIM")
       roundStatus = "finished"
     } else if (timeDiffMinutes < 30) {
       roundStatus = "late"
@@ -105,6 +106,7 @@ class GrowingSeedDisplay extends Component {
     } else {
       roundStatus = "early"
     }
+
 
     let plantType = await Backend.getPlantType(this.props.user)
     console.log("the plant type")
@@ -158,6 +160,7 @@ class GrowingSeedDisplay extends Component {
     switch(this.state.roundStatus) {
       case "early":
         if (plantType == "tomato") {
+          console.log("DA LITTLE ONE")
           toRender = <TomatoSmall />
         } else if (plantType === "pepper") {
           toRender = <PepperSmall />
