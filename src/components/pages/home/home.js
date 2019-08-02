@@ -6,9 +6,11 @@ import { ENV_API } from "../../../config.js"
 import PrizeDisplay from "./prizeDisplay.js"
 import ProfileEmpty from "../../../svg/profileEmpty.js"
 import { BrowserRouter as Router, Route, Link, Redirect, Switch } from 'react-router-dom'
-
+import AnimatingSpinnerBigWhite from "../../../svg/animating-spinner-big-white.js"
 
 let API = ENV_API
+let username;
+let blockchain
 
 class Home extends Component {
   // returns result = {teamName: string, memberList: array[string (address)]}
@@ -20,6 +22,18 @@ class Home extends Component {
   async getTeamId() {
     // TODO:
     return 0
+  }
+
+  async componentDidMount() {
+    username = await Backend.getUsername(this.context.account)
+    this.setState({hasLoaded: true})
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasLoaded: false
+    }
   }
 
   render() {
@@ -55,6 +69,10 @@ class Home extends Component {
       justifyContent: "center"
     }
 
+    if (!this.state.hasLoaded) {
+      return <AnimatingSpinnerBigWhite/>
+    }
+
     return(
         <div >
           <div className="aboveFeed">
@@ -76,7 +94,7 @@ class Home extends Component {
                   paddingLeft: "10px"
                 }}>
                   <div style={{ fontFamily: "SpaceMonoBold", fontSize: "14px", color: "#000000" }}>
-                    Your Team (default)
+                    {username}'s Team (default)
                 </div>
                   <div style={{ fontFamily: "SpaceMonoReg", fontSize: "11px", color: "#A5A5A5" }}>
                     1 member

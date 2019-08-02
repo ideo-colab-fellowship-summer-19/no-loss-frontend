@@ -34,12 +34,15 @@ class Team extends Component {
     pool = this.context.pool
     blockchain = new Blockchain(this.context)
     teamInfo = await blockchain.getTeamInfo(account);
+    console.log("Da info")
     console.log(teamInfo)
-    if (teamInfo.id === "-1") {
+    console.log(teamInfo.id)
+    if (teamInfo.teamId === "-1") {
       teamId = "Riding Solo"
     } else {
-      teamId = "Team " + teamInfo.id
+      teamId = "Team " + teamInfo.teamId
     }
+
     prizeAmount = await blockchain.getPrizeAmount().estimatedPrize;
     isPlanted = await Backend.isPlanted(account);
 

@@ -134,11 +134,10 @@ if (ENV == "devWithChain") {
       // get members and id
       console.log("here in afdas")
       let result = {
-        members: ["0x6e14e8534f48f15b8f2518a07fa60e90b887a538, 0x1111e8534f48f15b8f2518a07fa60e90b887a538, \
-        0x2222e8534f48f15b8f2518a07fa60e90b887a538"],
+        members: ["0x6e14e8534f48f15b8f2518a07fa60e90b887a538, 0x1111e8534f48f15b8f2518a07fa60e90b887a538, 0x2222e8534f48f15b8f2518a07fa60e90b887a538"],
         name: "The Squad",
         totalSeeds: 121,
-        id: 1
+        teamId: 1
       }
       return result
     }

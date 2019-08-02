@@ -8,7 +8,7 @@ import StepThree from "../../../svg/onboarding/stepThree.js"
 import StepFour from "../../../svg/onboarding/stepFour.js"
 import StepFive from "../../../svg/onboarding/stepFive.js"
 import LeftArrow from "../../../svg/leftArrow.js"
-
+import Backend from "../../../backend.js"
 
 let web3;
 let account;
@@ -47,6 +47,7 @@ class Onboarding extends Component {
     }
     // TODO: Send eth transaction
     // pool.setUsername.call(this.state.value, {from: account});
+    Backend.setUsername(account, this.state.value)
     console.log(this.props)
     this.props.doneOnboarding()
     this.setState({isRedirected: true})

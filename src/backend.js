@@ -99,6 +99,19 @@ if (ENV === "devWithChain") {
       localStorage.setItem(theKey, JSON.stringify(item))
     }
 
+    static async getUsername(account) {
+      let curUser = getFromLocalInternal(account)
+      return curUser.username
+    }
+
+    static async setUsername(account, value) {
+      let curUser = getFromLocalInternal(account)
+      console.log("the user")
+      console.log(curUser)
+      curUser.username = value
+      setLocalInternal(account, curUser)
+    }
+
     static async getTeamInfo(address) {
       let result = {
         members: ["0x6e14e8534f48f15b8f2518a07fa60e90b887a538, 0x1111e8534f48f15b8f2518a07fa60e90b887a538, \

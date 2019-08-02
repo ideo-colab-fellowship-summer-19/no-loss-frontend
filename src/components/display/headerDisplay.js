@@ -26,7 +26,7 @@ class HeaderDisplay extends Component {
         color: "#A5A5A5", fontSize: "14px", paddingBottom: "16px", alignItems: "center",
         paddingTop: "15px"}}>
         {this.props.children}
-        <div>
+        <div style={{marginTop: "7px"}}>
           {this.props.displayText}
         </div>
       </div>
