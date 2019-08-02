@@ -225,13 +225,18 @@ class Team extends Component {
               <div className="ChooseYourFighter" style={{
                 paddingLeft: "50px", paddingRight: "50px",
                 paddingTop: "30px", paddingBottom: "30px",
-                height: "113px", width: "217px",
+                height: "160px", width: "217px",
                 display: "flex", flexDirection: "column",
                 justifyContent: "space-between", alignItems: "center",
                 left: "29px", top: "291px", background: "#F1F1F1",
-                borderRadius: "20px", position: "absolute"
+                borderRadius: "20px", position: "absolute", fontFamily: "SpaceMonoBold",
+                fontSize: "14px"
               }}>
-                Join a team? (by username)
+              <div style={{paddingBottom: "10px"}}>
+                Join a team?
+                <div style={{fontSize: "9px", fontColor: "#A5A5A5", paddingBottom: "10px"}}>
+                </div>
+              </div>
                 {this.state.failedJoin && teamError}
                 <div className={"username-input"} style={{display: "flex",
                   flexDirection: "column",
@@ -243,7 +248,7 @@ class Team extends Component {
                 </div>
                 <div className={"button"} onClick={this.setTeam} style={{
                   background: "linear-gradient(169.43deg, #3D7A40 35.64%, #8DB601 101.77%)",
-                  borderRadius: "13.5px", width: "200px", height: "27px", color: "#FFFFFF",
+                  borderRadius: "13.5px", width: "200px", height: "25px", color: "#FFFFFF",
                   fontFamily: "SpaceMonoBold", fontSize: "11px", display: "flex",
                   alignItems: "center", justifyContent: "center", marginBottom: "10px"
                   }}>
@@ -251,7 +256,7 @@ class Team extends Component {
                 </div>
                 <div className={"button"} onClick={this.skipTeam} style={{
                   background: "#F1F1F1", border: "1px solid #A5A5A5",
-                  borderRadius: "13.5px", width: "200px", height: "27px", color: "#A5A5A5",
+                  borderRadius: "13.5px", width: "200px", height: "25px", color: "#A5A5A5",
                   fontFamily: "SpaceMonoBold", fontSize: "11px", display: "flex",
                   alignItems: "center", justifyContent: "center"
                   }}>
