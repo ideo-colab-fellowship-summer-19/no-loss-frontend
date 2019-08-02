@@ -63,7 +63,7 @@ class Team extends Component {
             </HeaderDisplay>
             <div className="mainContent">
               <TrophyCase numTrophies={1} />
-              <PurchaseFlow />
+              <PurchaseFlow togglePurchase={this.togglePurchase}/>
               <div style={{ paddingTop: "30px" }}>
               <TeamStatsDisplay teamInfo={teamInfo} prizeInfo={prizeAmount} 
                 togglePurchase={this.togglePurchase}/>
