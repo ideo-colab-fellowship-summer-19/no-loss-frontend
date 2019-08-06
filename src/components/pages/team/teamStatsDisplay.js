@@ -26,6 +26,9 @@ class TeamStatsDisplay extends Component {
     userData = await blockchain.getUserData()
     prizePool = await blockchain.getPoolData()
     prizePool = prizePool.estimatedInterestFixedPoint18
+    // TODO: remove this. temporary hack
+    prizePool = 500
+    // -----
     yourShare = await this.calculateWinShare(userData);
     this.setState({ hasLoaded: true })
   }
@@ -53,6 +56,8 @@ class TeamStatsDisplay extends Component {
   async getPrizePool() {
     let thePrize = await blockchain.getPoolData()
     thePrize = thePrize.estimatedInterestFixedPoint18
+    // TODO: FIxe temp hack
+    thePrize = 5000
     return thePrize
   }
 
@@ -66,6 +71,14 @@ class TeamStatsDisplay extends Component {
   }
 
   render() {
+    if (this.props.totalSeeds === 1) {
+      yourShare = 500
+      teamTickets = 1
+    } else {
+      yourShare = 0
+      teamTickets = 0
+    }
+
     let toRender
     if (this.state.hasLoaded) {
       toRender =
@@ -93,7 +106,7 @@ class TeamStatsDisplay extends Component {
           <div className={"right-side"} style={{ display: "flex", flexDirection: "column", 
             alignItems: "center", width: "155px", justifyContent: "space-between" }}>
             <div style={{ display: "flex", flexDirection: "row"}}>
-              <SeedPod togglePurchase={(this.props.togglePurchase)}/>
+              <SeedPod togglePurchase={(this.props.togglePurchase)} totalSeeds={this.props.totalSeeds}/>
             </div>
             <div style={{ display: "flex", flexDirection: "row", fontFamily: "SpaceMonoReg", 
               fontSize: "11px", color: "#C4C4C4", width: "125px", paddingLeft: "15px", paddingRight: "15px",

@@ -145,7 +145,7 @@ class Onboarding extends Component {
           <div className={"username-input"} style={onboardingStyle}>
             <input type="text" value={this.state.value} onChange={this.handleChange}
               style={{borderRadius: "13.5px", width: "240px", height: "20px", border: "white",
-                marginTop: "-55px", cursor: "pointer"}} />
+                marginTop: "-55px", cursor: "pointer", paddingLeft: "11px"}} />
           </div>
           <div className={"button"} onClick={this.setUsername} style={{
           background: "linear-gradient(169.43deg, #3D7A40 35.64%, #8DB601 101.77%)",

@@ -46,13 +46,15 @@ class Team extends Component {
     prizeAmount = await blockchain.getPrizeAmount().estimatedPrize;
     isPlanted = await Backend.isPlanted(account);
     isJoined = await Backend.isJoined(account);
+    let totalSeeds = await Backend.getTotalSeeds(account);
 
     console.log("plantingstatus")
     console.log(isPlanted)
     console.log("info mounted")
     console.log(teamInfo)
     this.setState({hasLoaded: true, isPurchasing: false, isPlanted: isPlanted,
-      isJoined: isJoined, value: "" , teamId: teamId, failedJoin: false})
+      isJoined: isJoined, value: "" , teamId: teamId, failedJoin: false,
+      totalSeeds: totalSeeds})
   }
 
   componentWillReceiveProps(nextProps) {
@@ -68,6 +70,7 @@ class Team extends Component {
     this.setTeam = this.setTeam.bind(this);
     this.skipTeam = this.skipTeam.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.updateSeeds = this.updateSeeds.bind(this)
   }
 
   togglePurchase() {
@@ -99,6 +102,12 @@ class Team extends Component {
     }
   }
 
+  async updateSeeds() {
+    let totalSeeds;
+    totalSeeds = await Backend.getTotalSeeds(account);
+    this.setState({totalSeeds: totalSeeds})
+  }
+
   skipTeam() {
     this.setState({isJoined: true})
   }
@@ -126,10 +135,12 @@ class Team extends Component {
             </HeaderDisplay>
             <div className="mainContent">
               <TrophyCase numTrophies={1} />
-              <PurchaseFlow togglePurchase={this.togglePurchase}/>
+              <PurchaseFlow togglePurchase={this.togglePurchase} updateSeeds={this.updateSeeds}/>
               <div style={{ paddingTop: "30px", position: "absolute", left: "17px", top: "420px"}}>
               <TeamStatsDisplay teamInfo={teamInfo} prizeInfo={prizeAmount} 
-                togglePurchase={this.togglePurchase} style={statsDisplayPosition}/>
+                togglePurchase={this.togglePurchase} style={statsDisplayPosition}
+                totalSeeds={this.state.totalSeeds} updateSeeds={this.updateSeeds}
+                />
               </div>
             </div>
             <div className="teamTab" style={teamPosition}>
@@ -165,7 +176,7 @@ class Team extends Component {
                 </div>
                 <div style={{display: "flex", flexDirection: "row",
                   justifyContent: "space-between", fontFamily: "SpaceMonoReg",
-                  fontSize: "11px"}}>
+                  fontSize: "11px", width: "200px"}}>
                   <div onClick={async () => {
                     await Backend.setPlantType(account, "corn")
                     await Backend.justPlanted(account)
@@ -173,7 +184,10 @@ class Team extends Component {
                     this.setState({isPlanted: true})
 
                     console.log("planted!")
-                    }}>
+                  }} style={{
+                    display: "flex", flexDirection: "column",
+                  justifyContent: "center", alignItems: "center"}}>
+            
                     <CornLogo/>   
                     Corn                 
                   </div>
@@ -183,7 +197,10 @@ class Team extends Component {
                     this.props.afterPlanting()
                     this.setState({isPlanted: true})
                     console.log("planted!")
-                    }} style={{marginLeft: "10px"}}>
+                    }} style={{marginLeft: "10px",
+                      display: "flex", flexDirection: "column",
+                      justifyContent: "center", alignItems: "center"
+                    }}>
                     <PepperLogo/> 
                     Pepper                   
                   </div>
@@ -193,7 +210,10 @@ class Team extends Component {
                     this.props.afterPlanting()
                     this.setState({isPlanted: true})
                     console.log("planted!")
-                    }}>
+                  }} style={{ marginLeft: "10px",
+                    display: "flex", flexDirection: "column",
+                    justifyContent: "center", alignItems: "center"
+                  }}>
                     <TomatoLogo/>     
                     Tomato               
                   </div>
@@ -201,7 +221,8 @@ class Team extends Component {
               </div>
               <div style={{ paddingTop: "30px", position: "absolute", left: "17px", top: "420px"}}>
                 <TeamStatsDisplay teamInfo={teamInfo} prizeInfo={prizeAmount} 
-                  togglePurchase={this.togglePurchase} style={statsDisplayPosition}/>
+                togglePurchase={this.togglePurchase} style={statsDisplayPosition}
+                totalSeeds={this.state.totalSeeds} updateSeeds={this.updateSeeds}/>
               </div>
             </div>
             <div className="teamTab" style={teamPosition}>
@@ -244,7 +265,7 @@ class Team extends Component {
                   bottom: "0"}}>
                   <input type="text" value={this.state.value} onChange={this.handleChange}
                       style={{borderRadius: "13.5px", width: "240px", height: "20px", border: "white",
-                        marginTop: "-55px", cursor: "pointer"}} />
+                        marginTop: "-55px", cursor: "pointer", paddingLeft: "11px"}} />
                 </div>
                 <div className={"button"} onClick={this.setTeam} style={{
                   background: "linear-gradient(169.43deg, #3D7A40 35.64%, #8DB601 101.77%)",
@@ -265,7 +286,8 @@ class Team extends Component {
               </div>
               <div style={{ paddingTop: "30px", position: "absolute", left: "17px", top: "420px"}}>
                 <TeamStatsDisplay teamInfo={teamInfo} prizeInfo={prizeAmount} 
-                  togglePurchase={this.togglePurchase} style={statsDisplayPosition}/>
+                togglePurchase={this.togglePurchase} style={statsDisplayPosition}
+                totalSeeds={this.state.totalSeeds} updateSeeds={this.updateSeeds}/>
               </div>
             </div>
             <div className="teamTab" style={teamPosition}>
@@ -285,7 +307,8 @@ class Team extends Component {
               <GrowingSeedDisplay isBig={true} user={account} />
               <div style={{ paddingTop: "30px", position: "absolute", left: "17px", top: "420px"}}>
                 <TeamStatsDisplay teamInfo={teamInfo} prizeInfo={prizeAmount} 
-                  togglePurchase={this.togglePurchase} style={statsDisplayPosition}/>
+                togglePurchase={this.togglePurchase} style={statsDisplayPosition}
+                totalSeeds={this.state.totalSeeds} updateSeeds={this.updateSeeds}/>
               </div>
             </div>
             <div className="teamTab" style={teamPosition}>

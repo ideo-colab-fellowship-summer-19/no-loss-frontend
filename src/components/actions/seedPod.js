@@ -43,7 +43,7 @@ class SeedPod extends Component {
           </div>
           <div style={{
             fontFamily: "SpaceMonoBold"}}>
-            {this.state.totalSeeds}
+            {this.props.totalSeeds}
           </div>
         </div>
       )

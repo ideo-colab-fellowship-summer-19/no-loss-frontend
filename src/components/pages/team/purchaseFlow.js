@@ -40,6 +40,7 @@ class PurchaseFlow extends Component {
     this.setTen = this.setTen.bind(this);
     this.setTwenty = this.setTwenty.bind(this);
     this.autoPlant = this.autoPlant.bind(this);
+    this.finishPurchase = this.finishPurchase.bind(this);
   }
 
   setOne() {
@@ -70,9 +71,14 @@ class PurchaseFlow extends Component {
     }
   }
 
+  async finishPurchase() {
+    await this.props.updateSeeds();
+    await this.props.togglePurchase();
+  }
+
   async autoPlant() {
     await Backend.registerAutoPlant();
-    this.props.togglePurchase();
+    await this.finishPurchase();
   }
 
   render() {
@@ -177,7 +183,7 @@ class PurchaseFlow extends Component {
             yes, plant seeds automatically
         </div>
 
-        <div className={"button"} onClick={this.props.togglePurchase} style={{
+        <div className={"button"} onClick={this.finishPurchase} style={{
           background: "rgb(241, 241, 241)", border: "1px solid #A5A5A5",
           borderRadius: "13.5px", width: "105px", height: "27px", color: "#A5A5A5",
           fontFamily: "SpaceMonoReg", fontSize: "11px", display: "flex",
