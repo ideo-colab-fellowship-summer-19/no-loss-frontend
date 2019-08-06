@@ -133,6 +133,7 @@ class TrophyCase extends Component {
       width: "375px",
       height: "637px",
       top: "134px",
+      left: "0px",
       background: "#FFFFFF",
       boxShadow: "0px -1px 4px rgba(0, 0, 0, 0.15)",
       borderTopLeftRadius: "30px",
@@ -149,7 +150,7 @@ class TrophyCase extends Component {
         toRender =
         <div style={{display: "flex", justifyContent: "center"}} >
           <div style={minimizedStyle} onClick={this.changeVisibility}>
-            <Bees params={{ beeList: this.state.bees, isMinimized: this.state.isMinimized }}
+            <Bees params={{ beeList: this.props.beeList, isMinimized: this.state.isMinimized }}
               style={{
                 display: "flex", flexDirection: "column", justifyContent: "left",
                 paddingLeft: "5px", paddingRight: "5px"
@@ -162,7 +163,7 @@ class TrophyCase extends Component {
         // full screen
         toRender = 
           <div style={expandedStyle} onClick={this.changeVisibility}>
-          <Bees params={{ beeList: this.state.bees, isMinimized: this.state.isMinimized}}
+          <Bees params={{ beeList: this.props.beeList, isMinimized: this.state.isMinimized}}
           style={{ display: "flex", flexDirection: "row", flexWrap: "wrap"}} />
         </div>
       }

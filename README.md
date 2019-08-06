@@ -1,4 +1,22 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# HoneyPod Frontend
+
+The HoneyPod frontend is implemented in react. Currently, it does not talk to
+the backend or the smart contract (it currently simulates them in local storage).
+However, linking up the backend and the smart contract should be pretty easy.
+Just implement all the functions in Backend.js and Blockchain.js and change
+the environment variable from "devNoChain" in config.js
+Note that since this was written quickly with cut corners before demoing, there are likely to be some bugs upon linking the backend / blockchain.
+
+The profile page and the settings page are not yet implemented.
+
+I planned to use the backend only to store team names, user photos, team photos,
+and transaction history. The rest of the information (game state etc) lives in the
+smart contract.
+
+The web3 object and account are accessed throughout the whole app using context.
+
+The current app is deployed using Netlify at honeypod.netlify.com. Also,
+we have the domain honeypod.global which points to honeypod.netlify.com.
 
 ## Available Scripts
 

@@ -95,14 +95,17 @@ class DrawingFlow extends Component {
     this.increment = this.increment.bind(this);
   }
 
-  increment() {
+  async increment() {
     // TODO: Change if animations added
     console.log(this.state)
     console.log("incremeneting")
     if (this.state.drawingStatus === 1) {
       console.log(this.props.endDrawing)
-      let beeRandom = Math.floor((Math.random() * 10) + 1);
-      Backend.addBee(account, beeRandom)
+      let beeRandom = Math.floor((Math.random() * 6) + 1);
+      console.log("zeus num")
+      console.log(beeRandom)
+      await Backend.addBee(account, beeRandom)
+      this.props.reloadBees()
       this.props.endDrawing()
     }
 

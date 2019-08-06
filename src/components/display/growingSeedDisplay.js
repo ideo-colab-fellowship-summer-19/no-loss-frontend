@@ -88,6 +88,9 @@ class GrowingSeedDisplay extends Component {
     blockchain = new Blockchain(this.context)
     let drawingDate = new Date(COUNTER_END_DATE)
     let currentDate = new Date()
+    console.log("the times")
+    console.log(drawingDate.toString())
+    console.log(currentDate.toString())
     let timeDiff = drawingDate.getTime() - currentDate.getTime()
     let timeDiffMinutes = Math.floor(timeDiff / 1000 / 60);
     let roundStatus = "unset";
@@ -97,9 +100,11 @@ class GrowingSeedDisplay extends Component {
     if (this.state.drawingFinished) {
       roundStatus = "early"
     } else if (currentDate > drawingDate) {
+      console.log("the time is done")
       console.log("FINISH HIM")
       roundStatus = "finished"
     } else if (timeDiffMinutes < 30) {
+      console.log("the time is late")
       roundStatus = "late"
     } else if (timeDiffMinutes < 60) {
       roundStatus = "middle"
@@ -191,17 +196,17 @@ class GrowingSeedDisplay extends Component {
       case "finished":
         if (plantType == "tomato") {
           toRender = 
-          <DrawingFlow endDrawing={this.endDrawing} fruit={"tomato"}>
+          <DrawingFlow endDrawing={this.endDrawing} fruit={"tomato"} reloadBees={this.props.reloadBees}>
             <TomatoBearingFruit/>
           </DrawingFlow>
         } else if (plantType === "pepper") {
           toRender = 
-          <DrawingFlow endDrawing={this.endDrawing} fruit={"pepper"}>
+          <DrawingFlow endDrawing={this.endDrawing} fruit={"pepper"} reloadBees={this.props.reloadBees}>
             <PepperBearingFruit/>
           </DrawingFlow>
         } else if (plantType === "corn") {
           toRender = 
-          <DrawingFlow endDrawing={this.endDrawing} fruit={"corn"}>
+            <DrawingFlow endDrawing={this.endDrawing} fruit={"corn"} reloadBees={this.props.reloadBees}>
             <CornBearingFruit/>
           </DrawingFlow>
         }
@@ -216,23 +221,17 @@ class GrowingSeedDisplay extends Component {
     let plantStyle = {
       display: "flex",
       justifyContent: "center",
-      marginTop: "70px"
     };
+
     if (this.props.isBig) {
       plantStyle = {
         display: "flex",
         justifyContent: "center",
-        position: "absolute",
-        bottom: "225px",
-        left: "82px"
       };
     } else {
       plantStyle = {
         display: "flex",
         justifyContent: "center",
-        position: "absolute",
-        bottom: "225px",
-        left: "82px"
       };
     }
 
@@ -240,7 +239,6 @@ class GrowingSeedDisplay extends Component {
       plantStyle = {
         display: "flex",
         justifyContent: "center",
-        marginTop: "70px"
       };
     } 
     

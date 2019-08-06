@@ -100,7 +100,7 @@ class Home extends Component {
                     1 member
                 </div>
                   {// TODO: getTeamInfo()
-                  }
+                  }kk
                 </div>
               </div>
             </Link>

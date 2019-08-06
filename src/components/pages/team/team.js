@@ -47,6 +47,7 @@ class Team extends Component {
     isPlanted = await Backend.isPlanted(account);
     isJoined = await Backend.isJoined(account);
     let totalSeeds = await Backend.getTotalSeeds(account);
+    let bees = await this.getBees()
 
     console.log("plantingstatus")
     console.log(isPlanted)
@@ -54,7 +55,7 @@ class Team extends Component {
     console.log(teamInfo)
     this.setState({hasLoaded: true, isPurchasing: false, isPlanted: isPlanted,
       isJoined: isJoined, value: "" , teamId: teamId, failedJoin: false,
-      totalSeeds: totalSeeds})
+      totalSeeds: totalSeeds, beeList: bees})
   }
 
   componentWillReceiveProps(nextProps) {
@@ -71,6 +72,16 @@ class Team extends Component {
     this.skipTeam = this.skipTeam.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateSeeds = this.updateSeeds.bind(this)
+    this.reloadBees = this.reloadBees.bind(this);
+  }
+
+  async getBees() {
+    console.log("the account")
+    console.log(account)
+    let theBees = await Backend.getBees(account)
+    console.log("running")
+    console.log(theBees)
+    return theBees
   }
 
   togglePurchase() {
@@ -108,6 +119,12 @@ class Team extends Component {
     this.setState({totalSeeds: totalSeeds})
   }
 
+  async reloadBees() {
+    let bees;
+    bees = await Backend.getBees(account);
+    this.setState({ beeList: bees })
+  }
+
   skipTeam() {
     this.setState({isJoined: true})
   }
@@ -133,8 +150,10 @@ class Team extends Component {
             <HeaderDisplay displayText={teamId}>
               <ProfileEmpty />
             </HeaderDisplay>
-            <div className="mainContent">
-              <TrophyCase numTrophies={1} />
+          <div className="mainContent" style={{
+            display: "flex", flexDirection: "column", justifyContent: "space-between",
+            height: "315px", alignItems: "center"}}>
+              <TrophyCase numTrophies={1} beeList={this.state.beeList} />
               <PurchaseFlow togglePurchase={this.togglePurchase} updateSeeds={this.updateSeeds}/>
               <div style={{ paddingTop: "30px", position: "absolute", left: "17px", top: "420px"}}>
               <TeamStatsDisplay teamInfo={teamInfo} prizeInfo={prizeAmount} 
@@ -159,8 +178,11 @@ class Team extends Component {
             <HeaderDisplay displayText={teamId}>
               <ProfileEmpty />
             </HeaderDisplay>
-            <div className="mainContent">
-              <TrophyCase numTrophies={1} />
+          <div className="mainContent" style={{
+            display: "flex", flexDirection: "column", justifyContent: "space-between",
+            height: "315px", alignItems: "center"
+          }}>
+              <TrophyCase numTrophies={1} beeList={this.state.beeList} />
               <div className="ChooseYourFighter" style={{
                 paddingLeft: "50px", paddingRight: "50px",
                 paddingTop: "30px", paddingBottom: "30px",
@@ -241,8 +263,11 @@ class Team extends Component {
             <HeaderDisplay displayText={teamId}>
               <ProfileEmpty />
             </HeaderDisplay>
-            <div className="mainContent">
-              <TrophyCase numTrophies={1} />
+          <div className="mainContent" style={{
+            display: "flex", flexDirection: "column", justifyContent: "space-between",
+            height: "315px", alignItems: "center"
+          }}>
+              <TrophyCase numTrophies={1} beeList={this.state.beeList} />
               <div className="ChooseYourFighter" style={{
                 paddingLeft: "50px", paddingRight: "50px",
                 paddingTop: "30px", paddingBottom: "30px",
@@ -302,9 +327,12 @@ class Team extends Component {
             <HeaderDisplay displayText={teamId}>
               <ProfileEmpty />
             </HeaderDisplay>
-            <div className="mainContent">
-              <TrophyCase numTrophies={1} />
-              <GrowingSeedDisplay isBig={true} user={account} />
+          <div className="mainContent" style={{
+            display: "flex", flexDirection: "column", justifyContent: "space-between",
+            height: "315px", alignItems: "center"
+          }}>
+              <TrophyCase numTrophies={1} beeList={this.state.beeList} />
+              <GrowingSeedDisplay isBig={true} user={account} reloadBees={this.reloadBees}/>
               <div style={{ paddingTop: "30px", position: "absolute", left: "17px", top: "420px"}}>
                 <TeamStatsDisplay teamInfo={teamInfo} prizeInfo={prizeAmount} 
                 togglePurchase={this.togglePurchase} style={statsDisplayPosition}

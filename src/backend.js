@@ -163,22 +163,32 @@ if (ENV === "devWithChain") {
     }
 
     static async addBee(account, beeNum) {
-      let curUser = getFromLocalInternal(account)
+      console.log("Zeus destroyer")
+      let curUser = await getFromLocalInternal(account)
       let bees = curUser.bees
-      if (beeNum === "1") {
+      console.log("woot")
+      console.log(bees)
+      if (beeNum === 1) {
         bees.push("football")
-      } else if (beeNum === "2") {
+        console.log(bees)
+      } else if (beeNum === 2) {
         bees.push("cute")
-      } else if (beeNum === "3") {
+        console.log(bees)
+      } else if (beeNum === 3) {
         bees.push("long")
-      } else if (beeNum === "4") {
+        console.log(bees)
+      } else if (beeNum === 4) {
         bees.push("sad")
-      } else if (beeNum === "5") {
+        console.log(bees)
+      } else if (beeNum === 5) {
         bees.push("small")
-      } else if (beeNum === "6") {
+        console.log(bees)
+      } else if (beeNum === 6) {
         bees.push("fat")
+        console.log(bees)
       }
       curUser.bees = bees
+      console.log(curUser)
 
       setLocalInternal(account, curUser)
     }
