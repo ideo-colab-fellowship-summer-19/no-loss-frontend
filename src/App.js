@@ -27,6 +27,7 @@ match, location, and history props to the wrapped component whenever it renders.
 To do so, at the bottom of your component write
 "export default withRouter(ComponentName)"
 */
+let existence;
 
 class App extends Component {
 
@@ -45,8 +46,11 @@ class App extends Component {
     this.afterJoining = this.afterJoining.bind(this)
   }
 
-  componentDidMount() {
-    
+  async componentWillMount() {
+    existence = await Backend.userExists()
+    console.log("do i exist")
+    console.log(existence)
+    this.setState({existence: existence, hasLoaded: true})
   }
 
   web3Loaded() {
@@ -80,13 +84,20 @@ class App extends Component {
       console.log("im here")
       menu = <MenuBar />
     }
+
+    if (!this.state.hasLoaded) {
+      return <AnimatingSpinnerBigWhite />
+    }
     return (
       <Router>
         <GlobalContext web3Loaded={this.web3Loaded}>
           {this.state.web3Loaded ?
               <ScrollToTop>
                 <Switch>
+                  {this.state.existence ? 
+                  <Route exact path="/" render={(props) => <Home {...props} />}/> :
                   <Route exact path="/" render={(props) => <Onboarding doneOnboarding={(this.doneOnboarding)} {...props} />} />
+                  }
                   <Route path="/home" render={(props) => <Home {...props} />} />
                   <Route exact path="/team" render={(props) => <Team afterPlanting={this.afterPlanting} afterJoining={this.afterJoining}
                     hasPlanted={this.state.hasPlanted} {...props} />} />

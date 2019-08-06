@@ -216,7 +216,7 @@ class GrowingSeedDisplay extends Component {
     let plantStyle = {
       display: "flex",
       justifyContent: "center",
-      marginTop: "40px"
+      marginTop: "70px"
     };
     if (this.props.isBig) {
       plantStyle = {
@@ -240,7 +240,7 @@ class GrowingSeedDisplay extends Component {
       plantStyle = {
         display: "flex",
         justifyContent: "center",
-        marginTop: "40px"
+        marginTop: "70px"
       };
     } 
     
