@@ -26,11 +26,17 @@ const Bees = ({ params }) => {
   console.log("Da Params")
   console.log(params)
   let individualStyle = {paddingLeft: "30px"}
-  if (beeList.length === 0 ) {
+  if (beeList.length === 0 && isMinimized) {
     return( 
     <div style={{fontFamily: "SpaceMonoReg", fontSize: "11px"}}>
       You haven't won any trophies yet!
     </div>)
+  } else if (beeList.length === 0) {
+    return(
+      <div style={{ fontFamily: "SpaceMonoReg", fontSize: "14px", marginLeft: "20px" }}>
+        You haven't won any trophies yet!
+    </div>
+    )
   }
   const toReturn = beeList.map(bee => {
     if (bee === "fat") {

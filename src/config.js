@@ -14,4 +14,4 @@ export const ENV_API = DEV_API
 
 export const POOL_ABI = PoolContractInfo.abi
 
-export const COUNTER_END_DATE = 'Fri, 02 Aug 2019 17:00:00'
+export const COUNTER_END_DATE = 'Tue, 06 Aug 2019 10:15:00'

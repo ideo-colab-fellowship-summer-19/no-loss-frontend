@@ -6,13 +6,13 @@ import Backend from "../../../backend.js";
 import AnimatingSpinnerBigWhite from "../../../svg/animating-spinner-big-white.js"
 
 let poolData;
-let seedCount;
+let totalSeeds;
 let blockchain;
 let userData;
 let web3;
 let account;
 let pool;
-let totalSeeds;
+let seedCount;
 
 class DrawingInfo extends Component {
   async componentDidMount() {
@@ -89,7 +89,7 @@ class DrawingInfo extends Component {
             </div>
           </div>
           <div>
-            {seedCount} seeds planted
+            {totalSeeds} seeds planted
           </div>
         </div>
       </div>
@@ -109,7 +109,7 @@ class DrawingInfo extends Component {
               seeds planted
             </div>
             <div>
-              {seedCount} seeds planted
+              {totalSeeds} seeds planted
           </div>
           </div>
         </div>
